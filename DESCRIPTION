@@ -1,0 +1,12 @@
+Package: song
+Title: Song Overlap Null-model Generator for animal communication
+Version: 0.9
+Author: Christina Masco <cmasco@uchicago.edu>, Stefano Allesina
+    <sallesina@uchicago.edu>
+Description: What the package does (paragraph)
+Depends:
+    R (>= 3.0.2),
+    ggplot2,
+    reshape2
+License: GPL-3
+LazyData: true

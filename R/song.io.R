@@ -1,7 +1,6 @@
 song.BuildBird <- function(ID, recital, start.record.time, end.record.time){
   ## create a bird:
   ## a list that includes some stats on the songs
-
   bird <- list()
   ## bird identifier
   bird$ID <- ID
@@ -25,17 +24,17 @@ song.BuildBird <- function(ID, recital, start.record.time, end.record.time){
   bird$gaps.length <- for.gaps.start - for.gaps.end
   bird$gaps.total.length <- sum(bird$gaps.length)
   ## check: gaps must be of positive length
-  if (sum(bird$gaps.length <= 0.) > 0){
-    print("The file contains inter-song intervals of negative length!")
+  if (sum(bird$gaps.length < 0.) > 0){
+    print(paste(bird$ID, "has inter-song intervals of negative length!"))
     ## print rows with negative gap lengths
     start <- as.vector(bird$recital[,1])
     end <- as.vector(bird$recital[,2])
     interval <- head(as.vector(bird$gaps.length),-1)
     output <- data.frame(start,end,interval)
-    print(subset(output, interval<0), row.names=TRUE)
+    print(output[which(output$interval<0),], row.names=TRUE)
     return(output)
   }  
- return(bird)
+  return(bird)
 }
 
 #' Reads a file containing the recitals for the birds

@@ -62,6 +62,8 @@ song.ReadRecitals <- function(file.recitals,
   ## are taken (respectively)
 
   recitals <- read.table(file.recitals)
+  #sort file by start time
+  recitals <- recitals[with(recitals, order(recitals[,1])), ]
   ## sanity check: each song must be of positive length
   lengths <- recitals[,2] - recitals[,1]
   if (sum(lengths <= 0.) > 0){

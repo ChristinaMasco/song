@@ -1,14 +1,20 @@
-#' Checks whether two songs are overlapping, and returns time they overlap
-#' @param my.song1 A vector containing starting (my.song1[1]) and stopping time (my.song1[2])
-#' @param my.song2 A vector containing starting (my.song2[1]) and stopping time (my.song2[2])
-#' @return The amount of time the two songs overlap
+#' @title Determine whether two songs overlap
+#' 
+#' @description
+#' \code{song.DoSongsOverlap} determines whether two songs overlap, and returns
+#' the duration of overlap in seconds
+#' 
+#' @param my.song1,mysong.2 Numeric vectors containing the start and end times
+#'  of songs 1 and 2 respectively 
+#' 
+#' @return The amount of time (in seconds) for which the two songs overlap
 #' @examples
 #' s1 <- c(0.0, 1.0)
-#' s2 <- c(0.5, 1.25)
+#' s2 <- c(0.5, 2.0)
 #' print(song.DoSongsOverlap(s1, s2))
 #'
-#' s1 <- c(0.0, 0.5)
-#' s2 <- c(0.5, 1.25)
+#' s1 <- c(0.0, 1.0)
+#' s2 <- c(1.0, 2.0)
 #' print(song.DoSongsOverlap(s1, s2))
 song.DoSongsOverlap <- function(my.song1, my.song2){
   ## if the two songs are overlapping, return the overlap time

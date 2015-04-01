@@ -1,20 +1,20 @@
 song.Simulate <- function(birds,
-                          num.rand = 250,
+                          num.rand = 100,
                           overlap.function = "song.TimeOverlap",
                           randomize.function = "song.RandomizeSampleGaps"){
   ptm <- proc.time()
   ## match the functions
   f.overlap <- match.fun(overlap.function)
   f.randomize <- match.fun(randomize.function)
-  ## randomize birds recitals
+  ## randomize birds songs
   num.birds <- length(birds)
   for (i in 1:num.birds){
     b <- birds[[i]]
     print(paste("Randomizing bird", b$ID))
     songs.num <- b$songs.num
-    b$random.recitals <- array(0, c(songs.num, 2, num.rand))
+    b$random.songs <- array(0, c(songs.num, 2, num.rand))
     for (j in 1:num.rand){
-      b$random.recitals[,,j] <- f.randomize(b)
+      b$random.songs[,,j] <- f.randomize(b)
     }
     birds[[i]] <- b
   }
@@ -30,9 +30,9 @@ song.Simulate <- function(birds,
     for (j in 1:num.birds){
       bird.names[j] <- as.character(birds[[j]]$ID)
       print(paste("... and", bird.names[j]))
-      observed[i, j] <- f.overlap(birds[[j]]$recital, birds[[i]]$recital)
-      randomized[i, j, ] <- apply(birds[[j]]$random.recitals, 3,
-                                  f.overlap, birds[[i]]$recital)
+      observed[i, j] <- f.overlap(birds[[j]]$songs, birds[[i]]$songs)
+      randomized[i, j, ] <- apply(birds[[j]]$random.songs, 3,
+                                  f.overlap, birds[[i]]$songs)
       expected[i,j] <- sum(randomized[i, j, ] )
       ## sum of cases in which randomized overlap is higher than observed
       p.values[i,j] <- sum(randomized[i,j,] >= observed[i,j])
@@ -55,4 +55,15 @@ song.Simulate <- function(birds,
               randomized = randomized,
               overlap.method = overlap.function,
               randomize.method = randomize.function))
+}
+
+
+song.BatchSimulate <- function(birdlist, num.rand = 100,
+                               overlap.function = "song.TimeOverlap",
+                               randomize.function = "song.RandomizeSampleGaps"){
+  output <- list()
+  for (i in 1:length(birdlist)){
+    output[[i]] <- song.Simulate(birdlist[[i]], num.rand, overlap.function,randomize.function)
+  }
+  return(output)
 }

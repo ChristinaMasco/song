@@ -22,14 +22,14 @@ song.TestAccuracy <- function(birdlist, model, overlap.function){
   }
   
   for (i in 1:length(model)){
-    mean <- model[[i]]$expected[1,2]
-    observed <- model[[i]]$observed[1,2]
+    mean <- model[[i]]$expected[2,1]
+    observed <- model[[i]]$observed[2,1]
     
     num.birds = length(dimnames(model[[i]]$observed)[[1]])
     num.rand = length(model[[i]]$randomized)/num.birds^2
     
     dx[i] <- abs(observed - mean)
-    p[i] <- model[[i]]$p.values[1,2]
+    p[i] <- model[[i]]$p.values[2,1]
   }
   
   avg.dx <- mean(dx)
@@ -65,6 +65,6 @@ song.HowManyRandomizations <- function (birdlist, n, overlap.function, randomize
     tests[i,] <- song.TestAccuracy(birdlist,model,overlap.function)
   }
   # return a data frame containing the number of randomizations, the average % deviation, and the run time
-  output <- data.frame(n=n, dx=tests[,1], pct=tests[,2], runtime=runtime)
+  output <- data.frame(n=n, dx=tests[,1], pct=tests[,2], p=tests[,3], runtime=runtime)
   return(output)
 }

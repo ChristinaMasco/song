@@ -36,22 +36,22 @@ song.DoSongsOverlap <- function(my.song1, my.song2){
   return(0.0)
 }
 
-song.OverlapOneSongWithRecital <- function(my.song, my.recital){
-  ## total overlap between my.song and all songs in my.recital
-  return(sum(apply(my.recital, 1, song.DoSongsOverlap, my.song)))
+song.OverlapOneSongWithSongList <- function(my.song, my.songlist){
+  ## total overlap between my.song and all songs in my.songlist
+  return(sum(apply(my.songlist, 1, song.DoSongsOverlap, my.song)))
 }
 
-song.TimeOverlap <- function(recital.2, recital.1){
+song.TimeOverlap <- function(songlist.2, songlist.1){
   ## Compute the overlap in seconds between the songs
-  ## of the first bird (stored in recital.1) and the
-  ## second bird (recital.2)
-  overlaps <- apply(recital.1, 1, song.OverlapOneSongWithRecital, recital.2)
+  ## of the first bird (stored in songlist.1) and the
+  ## second bird (songlist.2)
+  overlaps <- apply(songlist.1, 1, song.OverlapOneSongWithSongList, songlist.2)
   return(sum(overlaps))
 }
 
-song.NumOverlap <- function(recital.2, recital.1){
-  ## Compute the number of songs in recital.1
-  ## which overlap with any song in recital.2
-  overlaps <- apply(recital.1, 1, song.OverlapOneSongWithRecital, recital.2)
+song.NumOverlap <- function(songlist.2, songlist.1){
+  ## Compute the number of songs in songlist.1
+  ## which overlap with any song in songlist.2
+  overlaps <- apply(songlist.1, 1, song.OverlapOneSongWithSongList, songlist.2)
   return(sum(overlaps > 0))
 }

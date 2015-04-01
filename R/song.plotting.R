@@ -1,19 +1,19 @@
-song.PlotRecitals <- function(birds){
-  all.recitals <- matrix(0, 0, 2)
+song.PlotSongs <- function(birds){
+  all.songs <- matrix(0, 0, 2)
   all.names <- character(0)
   for (i in 1:length(birds)){
-    all.recitals <- rbind(all.recitals, birds[[i]]$recital)
+    all.songs <- rbind(all.songs, birds[[i]]$songs)
     all.names <- c(all.names, rep(birds[[i]]$ID, birds[[i]]$songs.num))
   }
   my.df <- data.frame(Birds = all.names,
-                      Start = all.recitals[,1],
-                      End = all.recitals[,2])
-  recital.plot <- ggplot(data = my.df, aes(x = Birds,
+                      Start = all.songs[,1],
+                      End = all.songs[,2])
+  songs.plot <- ggplot(data = my.df, aes(x = Birds,
                                            ymin = Start, ymax = End, colour = Birds)) +
     geom_linerange(size = I(2)) + scale_y_continuous("Time") +
     coord_flip() + theme_bw() +
     theme(legend.position = "none")
-  return(recital.plot)
+  return(songs.plot)
 }
 
 song.PlotResultsDensity <- function(results){

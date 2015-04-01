@@ -13,7 +13,7 @@ song.DutyCycle <- function(bird2, bird1){
 
   Expected.numsongs.overlapping <- f2 * p1
   Expected.numsongs.nonoverlapping <- f2 * (1 - p1)
-  Observed.numsongs.overlapping <- song.NumOverlap(bird1$recital, bird2$recital)
+  Observed.numsongs.overlapping <- song.NumOverlap(bird1$songs, bird2$songs)
   Observed.numsongs.nonoverlapping <- bird2$songs.num - Observed.numsongs.overlapping
 
   ValueForChiSq <- (Expected.numsongs.overlapping -

@@ -7,7 +7,7 @@ song.RandomizeSampleGaps <- function(bird){
   ## Also, the gap lengths are sampled at random
   ## such that the total gap length is kept constant.
 
-  rnd.recital <- bird$recital
+  rnd.songs <- bird$songs
   ## randomize the length of the gaps
   rnd.songs.length <- sample(bird$songs.length)
   ## draw random breakpoints for the gaps
@@ -25,15 +25,15 @@ song.RandomizeSampleGaps <- function(bird){
   end.songs <- cumul.gaps + cumul.songs + bird$start.record.time
   ## the start time can be found by difference
   start.songs <- end.songs - rnd.songs.length
-  rnd.recital[,1] <- start.songs
-  rnd.recital[,2] <- end.songs
-  return(rnd.recital)
+  rnd.songs[,1] <- start.songs
+  rnd.songs[,2] <- end.songs
+  return(rnd.songs)
 }
 
 song.RandomizeKeepGaps <- function(bird){
   ## randomize song order and gaps order
 
-  rnd.recital <- bird$recital
+  rnd.songs <- bird$songs
   rnd.songs.length <- sample(bird$songs.length)
   rnd.gaps.length <- sample(bird$gaps.length)
   ## cumulate the gap and the song lengths
@@ -44,16 +44,16 @@ song.RandomizeKeepGaps <- function(bird){
   end.songs <- cumul.gaps + cumul.songs + bird$start.record.time
   ## the start time can be found by difference
   start.songs <- end.songs - rnd.songs.length
-  rnd.recital[,1] <- start.songs
-  rnd.recital[,2] <- end.songs
-  return(rnd.recital)
+  rnd.songs[,1] <- start.songs
+  rnd.songs[,2] <- end.songs
+  return(rnd.songs)
 }
 
 song.RandomizeKeepSongOrder <- function(bird){
   ## randomize gaps order but keep the songs
-  ## in the same order as the observed recital of bird
+  ## in the same order as the observed songs of bird
 
-  rnd.recital <- bird$recital
+  rnd.songs <- bird$songs
   rnd.songs.length <- bird$songs.length
   rnd.gaps.length <- sample(bird$gaps.length)
   ## cumulate the gap and the song lengths
@@ -64,7 +64,7 @@ song.RandomizeKeepSongOrder <- function(bird){
   end.songs <- cumul.gaps + cumul.songs + bird$start.record.time
   ## the start time can be found by difference
   start.songs <- end.songs - rnd.songs.length
-  rnd.recital[,1] <- start.songs
-  rnd.recital[,2] <- end.songs
-  return(rnd.recital)
+  rnd.songs[,1] <- start.songs
+  rnd.songs[,2] <- end.songs
+  return(rnd.songs)
 }

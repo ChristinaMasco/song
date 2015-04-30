@@ -2,28 +2,38 @@
 % Please edit documentation in R/song.overlap.R
 \name{song.DoSongsOverlap}
 \alias{song.DoSongsOverlap}
-\title{Determine whether two songs overlap}
+\title{Determine whether two songs overlap.}
 \usage{
-song.DoSongsOverlap(my.song1, my.song2)
+song.DoSongsOverlap(song1, song2)
 }
 \arguments{
-\item{my.song1,mysong.2}{Numeric vectors containing the start and end times
- of songs 1 and 2 respectively}
+\item{song1,song2}{Numeric vectors containing the start and end times
+of songs 1 and 2 respectively. The first value in each vector represents the
+start time of the song; the second value represents the end time of the
+song.}
 }
 \value{
-The amount of time (in seconds) for which the two songs overlap
+\code{song.DoSongsOverlap} returns the duration of overlap in
+seconds.
 }
 \description{
-\code{song.DoSongsOverlap} determines whether two songs overlap, and returns
-the duration of overlap in seconds
+\code{song.DoSongsOverlap} determines whether two songs overlap and returns
+the duration of overlap in seconds.
 }
 \examples{
-s1 <- c(0.0, 1.0)
-s2 <- c(0.5, 2.0)
-print(song.DoSongsOverlap(s1, s2))
+## overlapping songs
+song1 <- c(0.0, 1.0)
+song2 <- c(0.5, 2.0)
+song.DoSongsOverlap(song1, song2)
 
-s1 <- c(0.0, 1.0)
-s2 <- c(1.0, 2.0)
-print(song.DoSongsOverlap(s1, s2))
+## non-overlapping songs
+song1 <- c(0.0, 1.0)
+song2 <- c(1.0, 2.0)
+song.DoSongsOverlap(song1, song2)
+}
+\seealso{
+For two performances, use \code{\link{song.TimeOverlap}} to
+calculate the total duration of overlap and \code{\link{song.NumOverlap}} to
+calculate the total number of overlapping songs.
 }
 

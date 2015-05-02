@@ -4,10 +4,10 @@
 \alias{song.WhoOverlaps}
 \title{Count the instances of overlap by individual.}
 \usage{
-song.WhoOverlaps(birds)
+song.WhoOverlaps(indivs)
 }
 \arguments{
-\item{birds}{A list created using \code{song.BuildSongList} or
+\item{indivs}{A list created using \code{song.BuildSongList} or
 \code{song.ReadSongList} that contains the performances of each individual.}
 }
 \value{
@@ -21,8 +21,14 @@ individual overlaps each other individual's songs. This function is an
 extension of \code{song.CountWhichOverlap}.
 }
 \examples{
+c <- song.BuildSongList(chickadees)
+song.WhoOverlaps(c)
+
 w <- song.BuildSongList(wrens)
 song.WhoOverlaps(w)
+
+m <- song.BuildSongList(manakins)
+song.WhoOverlaps(m)
 }
 \seealso{
 \code{\link{song.CountWhichOverlap}}

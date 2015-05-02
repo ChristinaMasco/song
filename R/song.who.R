@@ -137,7 +137,7 @@ song.CountWhichOverlap <- function(songlist, reference){
 #' individual overlaps each other individual's songs. This function is an
 #' extension of \code{song.CountWhichOverlap}.
 #' 
-#' @param birds A list created using \code{song.BuildSongList} or 
+#' @param indivs A list created using \code{song.BuildSongList} or 
 #' \code{song.ReadSongList} that contains the performances of each individual. 
 #'  
 #' @return \code{song.WhoOverlaps} returns a data frame containing the number 
@@ -145,17 +145,23 @@ song.CountWhichOverlap <- function(songlist, reference){
 #' "overlappers" and reference individuals in each case.
 #' 
 #' @examples
+#' c <- song.BuildSongList(chickadees)
+#' song.WhoOverlaps(c)
+#' 
 #' w <- song.BuildSongList(wrens)
 #' song.WhoOverlaps(w)
 #' 
+#' m <- song.BuildSongList(manakins)
+#' song.WhoOverlaps(m)
+#' 
 #' @seealso \code{\link{song.CountWhichOverlap}}
 
-song.WhoOverlaps <- function(birds){
-  id <- names(birds)
+song.WhoOverlaps <- function(indivs){
+  id <- names(indivs)
   overlaps <- data.frame(overlapper=character(), reference=character(), num.overlap=numeric())
   for(i in id){
     for(j in id){
-      num <- song.CountWhichOverlap(birds[[i]]$songs, birds[[j]]$songs)
+      num <- song.CountWhichOverlap(indivs[[i]]$songs, indivs[[j]]$songs)
       overlaps <- rbind(overlaps, data.frame(overlapper = i, 
                                              reference = j, num.overlap = num))
     }    

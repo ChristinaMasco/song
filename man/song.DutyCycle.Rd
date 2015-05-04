@@ -7,9 +7,9 @@
 song.DutyCycle(indiv2, indiv1)
 }
 \arguments{
-\item{indiv1,indiv2}{Lists created using \code{song.BuildSongList} or
-\code{song.ReadSongList} that contain the performances of individuals 1 and
-2 respectively.}
+\item{indiv1,indiv2}{Lists created using \code{\link{song.BuildSongList}} or
+\code{\link{song.ReadSongList}} that contain the performance statistics of
+individuals 1 and 2 respectively.}
 }
 \value{
 \code{song.DutyCycle} returns a list with class "\code{htest}"
@@ -52,8 +52,8 @@ m <- song.BuildSongList(manakins)
 song.DutyCycle(m$pairA, m$pairB)
 }
 \references{
-Ficken, R.W., Ficken, M.S. & Hailman, J.P. (1974). Temporal pattern shifts to
-avoid acoustic interference in singing birds. \emph{Science}, \strong{183},
-762-763.
+Ficken, R.W., Ficken, M.S. & Hailman, J.P. (1974). Temporal pattern shifts
+to avoid acoustic interference in singing birds. \emph{Science},
+\strong{183}, 762-763.
 }
 

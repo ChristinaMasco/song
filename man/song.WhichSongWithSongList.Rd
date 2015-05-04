@@ -23,7 +23,7 @@ occurs in the opposite direction), the function returns a value of 0.
 \description{
 \code{song.WhichSongWithSongList} determines whether a song overlaps and
 lags behind any song in a given performance. This function is an extension
-of \code{song.WhichSongsOverlap}.
+of \code{\link{song.WhichSongsOverlap}}.
 }
 \examples{
 ## song overlaps and lags behind a song in songlist
@@ -41,8 +41,5 @@ songlist <- matrix(c(0.0, 1.0,
                      7.0, 8.0,
                     10.0, 11.0), ncol=2, byrow=TRUE)
 song.WhichSongWithSongList(song, songlist)
-}
-\seealso{
-\code{\link{song.WhichSongsOverlap}}
 }
 

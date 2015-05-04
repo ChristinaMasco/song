@@ -19,7 +19,7 @@ reference songlist, (\code{reference}).
 \description{
 \code{song.CountWhichOverlap} counts the number of instances in which songs
 in one performance lag behind and overlap songs in another performance. This
-function is an extension of \code{song.WhichSongWithSonglist}.
+function is an extension of \code{\link{song.WhichSongWithSonglist}}.
 }
 \examples{
 reference <- matrix(c(0.0, 1.0,
@@ -35,6 +35,6 @@ song.CountWhichOverlap(songlist, reference)
 \seealso{
 \code{\link{song.WhichSongsOverlap}} and
 \code{\link{song.WhichSongWithSongList}} for determining the direction of
-overlap
+overlap.
 }
 

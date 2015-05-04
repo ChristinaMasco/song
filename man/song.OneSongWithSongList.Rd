@@ -22,7 +22,7 @@ seconds.
 \description{
 \code{song.OneSongWithSongList} calculates the total duration for which one
 song overlaps any song in a performance. This function is an extension of
-\code{song.DoSongsOverlap}.
+\code{\link{song.DoSongsOverlap}}.
 }
 \examples{
 ## overlapping song
@@ -40,8 +40,5 @@ songlist <- matrix(c(0.0, 1.0,
                      7.0, 8.0,
                     10.0, 11.0), ncol=2, byrow=TRUE)
 song.OneSongWithSongList(song, songlist)
-}
-\seealso{
-\code{\link{song.DoSongsOverlap}}.
 }
 

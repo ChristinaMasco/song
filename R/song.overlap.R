@@ -52,7 +52,7 @@ song.DoSongsOverlap <- function(song1, song2){
 #' @description
 #' \code{song.OneSongWithSongList} calculates the total duration for which one
 #' song overlaps any song in a performance. This function is an extension of 
-#' \code{song.DoSongsOverlap}.
+#' \code{\link{song.DoSongsOverlap}}.
 #' 
 #' @param song A numeric vector containing the start and end times of a song.
 #' The first value of the vector represents the start time of the song; the 
@@ -81,8 +81,6 @@ song.DoSongsOverlap <- function(song1, song2){
 #'                      7.0, 8.0,
 #'                     10.0, 11.0), ncol=2, byrow=TRUE)
 #' song.OneSongWithSongList(song, songlist)
-#' 
-#' @seealso \code{\link{song.DoSongsOverlap}}.
 
 song.OneSongWithSongList <- function(song, songlist){
   return(sum(apply(songlist, 1, song.DoSongsOverlap, song)))
@@ -93,7 +91,7 @@ song.OneSongWithSongList <- function(song, songlist){
 #' @description
 #' \code{song.TimeOverlap} calculates the total duration for which the songs in
 #' two performances overlap. This function is an extension of 
-#' \code{song.OneSongWithSongList}.
+#' \code{\link{song.OneSongWithSongList}}.
 #' 
 #' @param songlist1,songlist2 n x 2 matrices or data frames containing the 
 #' start and end times of n songs. The first columns contain the start times of
@@ -129,7 +127,7 @@ song.TimeOverlap <- function(songlist2, songlist1){
 #' @description
 #' \code{song.NumOverlap} counts the total number of overlapping songs in two 
 #' performances. This function is an extension of 
-#' \code{song.OneSongWithSongList}.
+#' \code{\link{song.OneSongWithSongList}}.
 #' 
 #' @param songlist1,songlist2 n x 2 matrices or data frames containing the 
 #' start and end times of n songs. The first columns contain the start times of

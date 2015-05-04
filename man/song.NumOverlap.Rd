@@ -18,7 +18,7 @@ overlap.
 \description{
 \code{song.NumOverlap} counts the total number of overlapping songs in two
 performances. This function is an extension of
-\code{song.OneSongWithSongList}.
+\code{\link{song.OneSongWithSongList}}.
 }
 \examples{
 songlist1 <- matrix(c(0.0, 1.0,

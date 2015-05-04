@@ -19,7 +19,7 @@ seconds.
 \description{
 \code{song.TimeOverlap} calculates the total duration for which the songs in
 two performances overlap. This function is an extension of
-\code{song.OneSongWithSongList}.
+\code{\link{song.OneSongWithSongList}}.
 }
 \examples{
 songlist1 <- matrix(c(0.0, 1.0,

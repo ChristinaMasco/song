@@ -56,7 +56,7 @@ song.WhichSongsOverlap <- function(song1, song2){
 #' @description
 #' \code{song.WhichSongWithSongList} determines whether a song overlaps and 
 #' lags behind any song in a given performance. This function is an extension 
-#' of \code{song.WhichSongsOverlap}.
+#' of \code{\link{song.WhichSongsOverlap}}.
 #' 
 #' @param song A numeric vector containing the start and end times of a song.
 #' The first value of the vector represents the start time of the song; the 
@@ -86,8 +86,6 @@ song.WhichSongsOverlap <- function(song1, song2){
 #'                      7.0, 8.0,
 #'                     10.0, 11.0), ncol=2, byrow=TRUE)
 #' song.WhichSongWithSongList(song, songlist)
-#' 
-#' @seealso \code{\link{song.WhichSongsOverlap}}
 
 song.WhichSongWithSongList <- function(song, songlist){
   overlaps <- apply(songlist, 1, song.WhichSongsOverlap, song)
@@ -99,7 +97,7 @@ song.WhichSongWithSongList <- function(song, songlist){
 #' @description
 #' \code{song.CountWhichOverlap} counts the number of instances in which songs
 #' in one performance lag behind and overlap songs in another performance. This
-#' function is an extension of \code{song.WhichSongWithSonglist}. 
+#' function is an extension of \code{\link{song.WhichSongWithSonglist}}. 
 #' 
 #' @param songlist,reference n x 2 matrices or data frames containing the start
 #' and end times of n songs. The first columns contain the start times of each 
@@ -122,7 +120,7 @@ song.WhichSongWithSongList <- function(song, songlist){
 #' 
 #' @seealso \code{\link{song.WhichSongsOverlap}} and 
 #' \code{\link{song.WhichSongWithSongList}} for determining the direction of
-#' overlap
+#' overlap.
 
 song.CountWhichOverlap <- function(songlist, reference){
   overlaps <- apply(songlist, 1, song.WhichSongWithSongList, reference)
@@ -135,10 +133,11 @@ song.CountWhichOverlap <- function(songlist, reference){
 #' @description
 #' \code{song.WhoOverlaps} counts the number of instances in which each 
 #' individual overlaps each other individual's songs. This function is an
-#' extension of \code{song.CountWhichOverlap}.
+#' extension of \code{\link{song.CountWhichOverlap}}.
 #' 
-#' @param indivs A list created using \code{song.BuildSongList} or 
-#' \code{song.ReadSongList} that contains the performances of each individual. 
+#' @param indivs A list created using \code{\link{song.BuildSongList}} or 
+#' \code{\link{song.ReadSongList}} that contains the performances of each 
+#' individual. 
 #'  
 #' @return \code{song.WhoOverlaps} returns a data frame containing the number 
 #' of instances of overlap for each pairwise interaction, specifying the 
@@ -158,7 +157,8 @@ song.CountWhichOverlap <- function(songlist, reference){
 
 song.WhoOverlaps <- function(indivs){
   id <- names(indivs)
-  overlaps <- data.frame(overlapper=character(), reference=character(), num.overlap=numeric())
+  overlaps <- data.frame(overlapper=character(), reference=character(), 
+                         num.overlap=numeric())
   for(i in id){
     for(j in id){
       num <- song.CountWhichOverlap(indivs[[i]]$songs, indivs[[j]]$songs)

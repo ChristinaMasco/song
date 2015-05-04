@@ -7,9 +7,9 @@
 song.WhoOverlaps(indivs)
 }
 \arguments{
-\item{indivs}{A list created using \code{\link{song.BuildSongList}} or
-\code{\link{song.ReadSongList}} that contains the performances of each
-individual.}
+\item{indivs}{A list created using \code{\link{song.BuildAllIndivs}} or
+\code{\link{song.ReadSongList}} that contains the performance statistics of
+each individual.}
 }
 \value{
 \code{song.WhoOverlaps} returns a data frame containing the number
@@ -22,13 +22,13 @@ individual overlaps each other individual's songs. This function is an
 extension of \code{\link{song.CountWhichOverlap}}.
 }
 \examples{
-c <- song.BuildSongList(chickadees)
+c <- song.BuildAllIndivs(chickadees)
 song.WhoOverlaps(c)
 
-w <- song.BuildSongList(wrens)
+w <- song.BuildAllIndivs(wrens)
 song.WhoOverlaps(w)
 
-m <- song.BuildSongList(manakins)
+m <- song.BuildAllIndivs(manakins)
 song.WhoOverlaps(m)
 }
 \seealso{

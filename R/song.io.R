@@ -13,7 +13,8 @@
 #' @param end.record.time A numeric value indicating the end time of the 
 #' performance.
 #'
-#' @return A list containing the following components:
+#' @return 
+#' \code{song.BuildIndiv} returns a list containing the following components:
 #' \describe{
 #'   \item{\code{ID}}{A character string giving the name of the individual.}
 #'   \item{\code{start.record.time}}{A numeric value indicating the start time
@@ -123,7 +124,8 @@ song.BuildIndiv <- function(ID, songs, start.record.time, end.record.time){
 #' is used (i.e. the end of the last song).
 #'
 #' @return 
-#' A list containing the following components for each individual:
+#' \code{song.ReadSongList} returns a list containing the following components 
+#' for each individual:
 #' \describe{
 #'   \item{\code{ID}}{A character string giving the name of the individual.}
 #'   \item{\code{start.record.time}}{A numeric value indicating the start time
@@ -206,7 +208,8 @@ song.ReadSongList <- function(file,
 #' is used (i.e. the end of the last song).
 #'
 #' @return 
-#' A list containing the following components for each individual:
+#' \code{song.BuildAllIndivs} returns a list containing the following components
+#' for each individual:
 #' \describe{
 #'   \item{\code{ID}}{A character string giving the name of the individual.}
 #'   \item{\code{start.record.time}}{A numeric value indicating the start time

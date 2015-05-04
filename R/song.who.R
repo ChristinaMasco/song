@@ -135,22 +135,22 @@ song.CountWhichOverlap <- function(songlist, reference){
 #' individual overlaps each other individual's songs. This function is an
 #' extension of \code{\link{song.CountWhichOverlap}}.
 #' 
-#' @param indivs A list created using \code{\link{song.BuildSongList}} or 
-#' \code{\link{song.ReadSongList}} that contains the performances of each 
-#' individual. 
+#' @param indivs A list created using \code{\link{song.BuildAllIndivs}} or 
+#' \code{\link{song.ReadSongList}} that contains the performance statistics of 
+#' each individual. 
 #'  
 #' @return \code{song.WhoOverlaps} returns a data frame containing the number 
 #' of instances of overlap for each pairwise interaction, specifying the 
 #' "overlappers" and reference individuals in each case.
 #' 
 #' @examples
-#' c <- song.BuildSongList(chickadees)
+#' c <- song.BuildAllIndivs(chickadees)
 #' song.WhoOverlaps(c)
 #' 
-#' w <- song.BuildSongList(wrens)
+#' w <- song.BuildAllIndivs(wrens)
 #' song.WhoOverlaps(w)
 #' 
-#' m <- song.BuildSongList(manakins)
+#' m <- song.BuildAllIndivs(manakins)
 #' song.WhoOverlaps(m)
 #' 
 #' @seealso \code{\link{song.CountWhichOverlap}}

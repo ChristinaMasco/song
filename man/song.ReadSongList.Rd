@@ -20,7 +20,8 @@ interaction. An optional parameter - if not specified, the maximum end time
 is used (i.e. the end of the last song).}
 }
 \value{
-A list containing the following components for each individual:
+\code{song.ReadSongList} returns a list containing the following components
+for each individual:
 \describe{
   \item{\code{ID}}{A character string giving the name of the individual.}
   \item{\code{start.record.time}}{A numeric value indicating the start time

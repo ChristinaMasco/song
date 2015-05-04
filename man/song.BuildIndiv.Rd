@@ -20,7 +20,7 @@ performance.}
 performance.}
 }
 \value{
-A list containing the following components:
+\code{song.BuildIndiv} returns a list containing the following components:
 \describe{
   \item{\code{ID}}{A character string giving the name of the individual.}
   \item{\code{start.record.time}}{A numeric value indicating the start time

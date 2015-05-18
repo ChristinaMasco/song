@@ -1,4 +1,70 @@
-song.Simulate <- function(birds,
+#' @title Compare observed overlap to chance expectations.
+#' 
+#' @description
+#' \code{song.Simulate} calculates the expected amount of overlap due to chance
+#' for a given interaction, then compares the observed amount of overlap to 
+#' this expectation. 
+#' 
+#' @details
+#' \code{song.Simulate} generates a user-defined number of randomized 
+#' interactions for each pair of individuals. The function then calculates the
+#' amount of overlap occuring in each of these randomized interactions. These 
+#' values represent the null distribution (i.e. the amount of overlap expected 
+#' due to chance). For each pair of individuals, the p-value is calculated as 
+#' the percentage of randomized interactions in which the amount of overlap is 
+#' greater than the amount of overlap in the observed interaction.
+#' 
+#' @param indivs A list created by \code{\link{song.BuildAllIndivs}} or 
+#' \code{\link{song.ReadSongList}} that contains the performance statistics of 
+#' each individual.
+#' @param num.rand A numeric value indicating the desired number of 
+#' randomizations.
+#' @param overlap.function The function to be used to calculate the amount of
+#' overlap. \code{\link{song.TimeOverlap}} returns the duration of overlap
+#' in seconds; \code{\link{song.NumOverlap}} returns the number of overlapping 
+#' songs.
+#' @param randomize.function The function to be used to generate the randomized
+#' performances for each individual. Options include 
+#' \code{\link{song.RandomizeSampleGaps}}, 
+#' \code{\link{song.RandomizeKeepGaps}}, and 
+#' \code{\link{song.RandomizeKeepSongOrder}}.     
+#'
+#' @return \code{song.Simulate} returns a list containing the following 
+#' components:
+#' \describe{
+#'   \item{observed}{A matrix containing the amount of overlap in the observed
+#'   interaction for each possible pair of individuals.}
+#'   \item{expected}{A matrix containing the average amount of overlap in the 
+#'   randomized interactions for each possible pair of individuals. These 
+#'   values represent the expected amounts of overlap due to chance.}
+#'   \item{p.values}{A matrix containing the p-values associated with each 
+#'   possible pair of individuals.}
+#'   \item{randomized}{A three-dimensional array containing the amount of 
+#'   overlap occurring in each randomized interaction. Each "slice" is a
+#'   matrix containing the amount of overlap for each possible pair of 
+#'   individuals. These values make up the null distribution.}
+#'   \item{overlap.method}{The function used to calculate the amount of 
+#'   overlap.}
+#'   \item{randomize.method}{The function used to generate the randomized 
+#'   interactions.}
+#' }
+#' 
+#' @examples
+#' c <- song.BuildAllIndivs(chickadees)
+#' c.rand <- song.Simulate(c, num.rand = 100, song.TimeOverlap, 
+#'                         song.RandomizeSampleGaps)
+#' ## Duration of overlap in the observed interaction
+#' c.rand$observed
+#' ## Duration of overlap expected due to chance
+#' c.rand$expected
+#' ## How does observed overlap compare to chance?
+#' c.rand$p.values
+#' 
+#' @seealso
+#' \code{\link{song.PlotResultsDensity}} to visualize the output of 
+#' \code{song.Simulate}.
+
+song.Simulate <- function(indivs,
                           num.rand = 100,
                           overlap.function = "song.TimeOverlap",
                           randomize.function = "song.RandomizeSampleGaps"){
@@ -6,33 +72,33 @@ song.Simulate <- function(birds,
   ## match the functions
   f.overlap <- match.fun(overlap.function)
   f.randomize <- match.fun(randomize.function)
-  ## randomize birds songs
-  num.birds <- length(birds)
-  for (i in 1:num.birds){
-    b <- birds[[i]]
-    print(paste("Randomizing bird", b$ID))
+  ## randomize songs
+  num.indivs <- length(indivs)
+  for (i in 1:num.indivs){
+    b <- indivs[[i]]
+    print(paste("Randomizing", b$ID))
     songs.num <- b$songs.num
     b$random.songs <- array(0, c(songs.num, 2, num.rand))
     for (j in 1:num.rand){
       b$random.songs[,,j] <- f.randomize(b)
     }
-    birds[[i]] <- b
+    indivs[[i]] <- b
   }
   ## now compute the overlaps
-  observed <- matrix(0, num.birds, num.birds)
-  expected <- matrix(0, num.birds, num.birds)
-  randomized <- array(0, c(num.birds, num.birds, num.rand))
-  p.values <- matrix(0, num.birds, num.birds)
-  bird.names <- rep("", num.birds)
-  for (i in 1:num.birds){
-    bird.names[i] <- as.character(birds[[i]]$ID)
-    print(paste("Running simulations for", bird.names[i]))
-    for (j in 1:num.birds){
-      bird.names[j] <- as.character(birds[[j]]$ID)
-      print(paste("... and", bird.names[j]))
-      observed[i, j] <- f.overlap(birds[[j]]$songs, birds[[i]]$songs)
-      randomized[i, j, ] <- apply(birds[[j]]$random.songs, 3,
-                                  f.overlap, birds[[i]]$songs)
+  observed <- matrix(0, num.indivs, num.indivs)
+  expected <- matrix(0, num.indivs, num.indivs)
+  randomized <- array(0, c(num.indivs, num.indivs, num.rand))
+  p.values <- matrix(0, num.indivs, num.indivs)
+  indiv.names <- rep("", num.indivs)
+  for (i in 1:num.indivs){
+    indiv.names[i] <- as.character(indivs[[i]]$ID)
+    print(paste("Running simulations for", indiv.names[i]))
+    for (j in 1:num.indivs){
+      indiv.names[j] <- as.character(indivs[[j]]$ID)
+      print(paste("... and", indiv.names[j]))
+      observed[i, j] <- f.overlap(indivs[[j]]$songs, indivs[[i]]$songs)
+      randomized[i, j, ] <- apply(indivs[[j]]$random.songs, 3,
+                                  f.overlap, indivs[[i]]$songs)
       expected[i,j] <- sum(randomized[i, j, ] )
       ## sum of cases in which randomized overlap is higher than observed
       p.values[i,j] <- sum(randomized[i,j,] >= observed[i,j])
@@ -42,12 +108,12 @@ song.Simulate <- function(birds,
   p.values <- p.values / num.rand
   ## get means
   expected <- expected / num.rand
-  colnames(p.values) <- bird.names
-  rownames(p.values) <- bird.names
-  colnames(observed) <- bird.names
-  rownames(observed) <- bird.names
-  colnames(expected) <- bird.names
-  rownames(expected) <- bird.names
+  colnames(p.values) <- indiv.names
+  rownames(p.values) <- indiv.names
+  colnames(observed) <- indiv.names
+  rownames(observed) <- indiv.names
+  colnames(expected) <- indiv.names
+  rownames(expected) <- indiv.names
   print(proc.time() - ptm)
   return(list(observed = observed,
               expected = expected,
@@ -55,15 +121,4 @@ song.Simulate <- function(birds,
               randomized = randomized,
               overlap.method = overlap.function,
               randomize.method = randomize.function))
-}
-
-
-song.BatchSimulate <- function(birdlist, num.rand = 100,
-                               overlap.function = "song.TimeOverlap",
-                               randomize.function = "song.RandomizeSampleGaps"){
-  output <- list()
-  for (i in 1:length(birdlist)){
-    output[[i]] <- song.Simulate(birdlist[[i]], num.rand, overlap.function,randomize.function)
-  }
-  return(output)
 }

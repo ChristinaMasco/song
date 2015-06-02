@@ -50,6 +50,7 @@ song.PlotSongs <- function(indivs, start.time = NA, end.time = NA){
     end.time <- max(my.df$End)
   }
   ## build ggplot object
+  require(ggplot2)
   songs.plot <- ggplot(data = my.df, aes(x = Individuals, ymin = Start, 
                                          ymax = End, colour = Individuals)) +
     geom_linerange(size = I(2)) + 
@@ -97,6 +98,7 @@ song.PlotSongs <- function(indivs, start.time = NA, end.time = NA){
 
 song.PlotResultsDensity <- function(results){
   ## create results data frame
+  require(reshape2)
   observed.df <- melt(results$observed)
   expected.df <- melt(results$expected)
   p.values.df <- melt(results$p.values)
@@ -134,11 +136,14 @@ song.PlotResultsDensity <- function(results){
       tmp.maxdensity <- c(tmp.maxdensity, maxdens)
       mypv <- all.df$p.value[all.df$Target == T & all.df$Randomized == R]
       if (mypv < 0.01){
-        tmp.pvalue <- c(tmp.pvalue,
-                        "p<0.01")
+        tmp.pvalue <- c(tmp.pvalue, "p < 0.01")
       } else{
-        tmp.pvalue <- c(tmp.pvalue,
-                        paste("p=", round(mypv,2), sep =""))
+        if (mypv > 0.99){
+          tmp.pvalue <- c(tmp.pvalue, "p > 0.99")
+        } else{
+          tmp.pvalue <- c(tmp.pvalue,
+                          paste("p =", round(mypv,2), sep =""))
+        }
       }
       tmp.xvalue <- c(tmp.xvalue, max(results$observed))
     }
@@ -152,6 +157,7 @@ song.PlotResultsDensity <- function(results){
   }
 
   ## build ggplot object
+  require(ggplot2)
   overlap.density.plot <- ggplot(data = density.df,
                                  aes(x = Overlap, fill = Target, 
                                      colour = Randomized)) +

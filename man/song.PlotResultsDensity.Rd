@@ -12,10 +12,12 @@ the observed and expected amounts of overlap for an interaction.}
 }
 \value{
 \code{song.PlotResultDensity} returns a \code{\link{ggplot}} object in which
-each panel of the plot represents a pairwise interaction. Within each panel,
-the observed amount of overlap (dashed line) is plotted relative to the null
-distribution (filled curve). The p-value corresponding to each pairwise
-interaction appears in the upper right corner of each panel.
+each panel of the plot represents a pairwise interaction. Each row (and fill
+color) specifies the reference individual. Each column (and line color)
+specifies the target individual. Within each panel, the observed amount of
+overlap (dashed line) is plotted relative to the null distribution (filled
+curve). The p-value corresponding to each pairwise interaction appears in the
+upper right corner of each panel.
 }
 \description{
 \code{song.PlotResultsDensity} creates a \code{\link{ggplot}} object that

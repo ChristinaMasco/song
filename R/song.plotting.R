@@ -72,10 +72,12 @@ song.PlotSongs <- function(indivs, start.time = NA, end.time = NA){
 #'
 #' @return 
 #' \code{song.PlotResultDensity} returns a \code{\link{ggplot}} object in which
-#' each panel of the plot represents a pairwise interaction. Within each panel, 
-#' the observed amount of overlap (dashed line) is plotted relative to the null
-#' distribution (filled curve). The p-value corresponding to each pairwise 
-#' interaction appears in the upper right corner of each panel.
+#' each panel of the plot represents a pairwise interaction. Each row (and fill
+#' color) specifies the reference individual. Each column (and line color)
+#' specifies the target individual. Within each panel, the observed amount of 
+#' overlap (dashed line) is plotted relative to the null distribution (filled 
+#' curve). The p-value corresponding to each pairwise interaction appears in the
+#' upper right corner of each panel.
 #' 
 #' @examples
 #' ## Black-capped chickadees
@@ -105,36 +107,36 @@ song.PlotResultsDensity <- function(results){
   all.df <- observed.df
   all.df <- cbind(all.df, expected.df[,3])
   all.df <- cbind(all.df, p.values.df[,3])
-  names(all.df) <- c("Target", "Randomized", "Observed", "Expected", "p.value")
+  names(all.df) <- c("Reference", "Target", "Observed", "Expected", "p.value")
   ## create null distribution data frame
   density.df <- melt(results$randomized,
-                     names = c("Target", "Randomized", "randnum"))[,-3]
-  names(density.df) <- c("Target", "Randomized", "Overlap")
+                     names = c("Reference", "Target", "randnum"))[,-3]
+  names(density.df) <- c("Reference", "Target", "Overlap")
   indivs.names <- colnames(results$observed)
-  density.df$Target <- as.factor(indivs.names[density.df$Target])
+  density.df$Reference <- as.factor(indivs.names[density.df$Reference])
   ## make the order of the rows the same as in the p.values table
-  density.df$Target <- factor(density.df$Target, colnames(results$p.values))
-  density.df$Randomized <- as.factor(indivs.names[density.df$Randomized])
+  density.df$Reference <- factor(density.df$Reference, colnames(results$p.values))
+  density.df$Target <- as.factor(indivs.names[density.df$Target])
   ## make the order of the cols the same as in the p.values table
-  density.df$Randomized <- factor(density.df$Randomized, 
+  density.df$Target <- factor(density.df$Target, 
                                   colnames(results$p.values))
   ## create p-value labels
   indiv.names <- colnames(results$observed)
+  tmp.refs <- character(0)
   tmp.targets <- character(0)
-  tmp.randomized <- character(0)
   tmp.maxdensity <- numeric(0)
   tmp.pvalue <- character(0)
   tmp.xvalue <- numeric(0)
 
   for (T in indiv.names){
     for (R in indiv.names){
-      x <- density.df$Overlap[density.df$Target == T & 
-                                density.df$Randomized == R]
+      x <- density.df$Overlap[density.df$Reference == R & 
+                                density.df$Target == T]
       maxdens <- max(density(x, kernel = "gaussian", adjust = 1)$y)
+      tmp.refs <- c(tmp.refs, R)
       tmp.targets <- c(tmp.targets, T)
-      tmp.randomized <- c(tmp.randomized, R)
       tmp.maxdensity <- c(tmp.maxdensity, maxdens)
-      mypv <- all.df$p.value[all.df$Target == T & all.df$Randomized == R]
+      mypv <- all.df$p.value[all.df$Reference == R & all.df$Target == T]
       if (mypv < 0.01){
         tmp.pvalue <- c(tmp.pvalue, "p < 0.01")
       } else{
@@ -145,27 +147,27 @@ song.PlotResultsDensity <- function(results){
                           paste("p =", round(mypv,2), sep =""))
         }
       }
-      tmp.xvalue <- c(tmp.xvalue, max(results$observed))
+      tmp.xvalue <- c(tmp.xvalue, max(results$observed, results$randomized))
     }
   }
-  p.df <- data.frame(Target = tmp.targets, Randomized = tmp.randomized, 
+  p.df <- data.frame(Reference = tmp.refs, Target = tmp.targets, 
                      xpos = tmp.xvalue, ypos = tmp.maxdensity, 
                      mylabel = tmp.pvalue)
   ## adjust vertical alignment
-  for (T in indiv.names){
-    p.df$ypos[p.df$Target == T] <- max( p.df$ypos[p.df$Target == T])
+  for (R in indiv.names){
+    p.df$ypos[p.df$Reference == R] <- max( p.df$ypos[p.df$Reference == R])
   }
 
   ## build ggplot object
   require(ggplot2)
   overlap.density.plot <- ggplot(data = density.df,
-                                 aes(x = Overlap, fill = Target, 
-                                     colour = Randomized)) +
+                                 aes(x = Overlap, fill = Reference, 
+                                     colour = Target)) +
     geom_density(alpha = 0.2) +  theme_bw() + scale_y_continuous("Density") +
     geom_vline(data = all.df,
                aes(xintercept = Observed),
                colour = I("black"), linetype = 2, alpha = 0.5, size = 0.75) +                                                    geom_text(data = p.df, aes(x = xpos, y = ypos, label = mylabel), hjust = 1, vjust = 1, size = 4, col = "black") +
-    facet_grid(Target ~ Randomized, scales = "free_y") +
+    facet_grid(Reference ~ Target, scales = "free_y") +
     theme(legend.position = "none")
   return(overlap.density.plot)
 }

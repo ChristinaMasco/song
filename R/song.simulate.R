@@ -1,18 +1,22 @@
 #' @title Compare observed overlap to chance expectations.
 #' 
 #' @description
-#' \code{song.Simulate} calculates the expected amount of overlap due to chance
-#' for a given interaction, then compares the observed amount of overlap to 
-#' this expectation. 
+#' \code{song.Simulate} calculates the expected amount of chance overlap for a 
+#' given interaction, then compares the observed amount of overlap to 
+#' this expectation to generate a p-value. 
 #' 
 #' @details
 #' \code{song.Simulate} generates a user-defined number of randomized 
-#' interactions for each pair of individuals. The function then calculates the
-#' amount of overlap occuring in each of these randomized interactions. These 
-#' values represent the null distribution (i.e. the amount of overlap expected 
-#' due to chance). For each pair of individuals, the p-value is calculated as 
-#' the percentage of randomized interactions in which the amount of overlap is 
-#' greater than the amount of overlap in the observed interaction.
+#' performances for each individual. The function then selects one individual 
+#' as the "reference" and another as the "target" to create a set of randomized
+#' interactions, pairing the reference individual's observed performance with 
+#' each of the target's randomized performances. \code{song.Simulate} 
+#' calculates the amount of overlap occuring during each of these randomized 
+#' interactions to generate the null distribution (i.e. the amount of overlap 
+#' expected due to chance). The p-value is calculated as the percentage of 
+#' randomized interactions in which the amount of overlap is greater than the 
+#' amount of overlap in the observed interaction. This process is repeated for 
+#' each possible combination of reference and target individuals.
 #' 
 #' @param indivs A list created by \code{\link{song.BuildAllIndivs}} or 
 #' \code{\link{song.ReadSongList}} that contains the performance statistics of 
@@ -29,8 +33,11 @@
 #' \code{\link{song.RandomizeKeepGaps}}, and 
 #' \code{\link{song.RandomizeKeepSongOrder}}.     
 #'
-#' @return \code{song.Simulate} returns a list containing the following 
-#' components:
+#' @return \code{song.Simulate} returns a list containing the components
+#' described below. In each output matrix, the row name specifies the reference
+#' individual, while the column name specifies the target (or randomized)
+#' individual. Overlap is measured for the target individual with respect to 
+#' the reference individual.
 #' \describe{
 #'   \item{observed}{A matrix containing the amount of overlap in the observed
 #'   interaction for each possible pair of individuals.}
@@ -40,8 +47,8 @@
 #'   \item{p.values}{A matrix containing the p-values associated with each 
 #'   possible pair of individuals.}
 #'   \item{randomized}{A three-dimensional array containing the amount of 
-#'   overlap occurring in each randomized interaction. Each "slice" is a
-#'   matrix containing the amount of overlap for each possible pair of 
+#'   overlap occurring in each randomized interaction. Each "slice" corresponds
+#'   to one randomization, containing the amount of overlap for each possible pair of 
 #'   individuals. These values make up the null distribution.}
 #'   \item{overlap.method}{The function used to calculate the amount of 
 #'   overlap.}
@@ -51,14 +58,14 @@
 #' 
 #' @examples
 #' c <- song.BuildAllIndivs(chickadees)
-#' c.rand <- song.Simulate(c, num.rand = 100, song.TimeOverlap, 
+#' c.sim <- song.Simulate(c, num.rand = 100, song.TimeOverlap, 
 #'                         song.RandomizeSampleGaps)
 #' ## Duration of overlap in the observed interaction
-#' c.rand$observed
+#' c.sim$observed
 #' ## Duration of overlap expected due to chance
-#' c.rand$expected
+#' c.sim$expected
 #' ## How does observed overlap compare to chance?
-#' c.rand$p.values
+#' c.sim$p.values
 #' 
 #' @seealso
 #' \code{\link{song.PlotResultsDensity}} to visualize the output of 
@@ -84,7 +91,7 @@ song.Simulate <- function(indivs,
     }
     indivs[[i]] <- b
   }
-  ## now compute the overlaps
+  ## now compute the overlaps, i = reference, j = target
   observed <- matrix(0, num.indivs, num.indivs)
   expected <- matrix(0, num.indivs, num.indivs)
   randomized <- array(0, c(num.indivs, num.indivs, num.rand))

@@ -4,32 +4,34 @@
 \alias{song.NumOverlap}
 \title{Count the total number of songs that overlap.}
 \usage{
-song.NumOverlap(songlist2, songlist1)
+song.NumOverlap(target, reference)
 }
 \arguments{
-\item{songlist1,songlist2}{n x 2 matrices or data frames containing the
-start and end times of n songs. The first columns contain the start times of
-each song; the second columns contain the end times of each song.}
+\item{target,reference}{n x 2 matrices or data frames containing the start
+and end times of n songs. The first columns contain the start times of each
+song; the second columns contain the end times of each song. The amount of
+overlap is calculated for the \code{target} with respect to the
+\code{reference}.}
 }
 \value{
 \code{song.NumOverlap} returns the total number of songs that
 overlap.
 }
 \description{
-\code{song.NumOverlap} counts the total number of overlapping songs in two
-performances. This function is an extension of
+\code{song.NumOverlap} counts the total number of songs in one performance
+that overlap and lag behind the songs in another. This function is an extension of
 \code{\link{song.OneSongWithSongList}}.
 }
 \examples{
-songlist1 <- matrix(c(0.0, 1.0,
+reference <- matrix(c(0.0, 1.0,
                       3.0, 4.0,
                       7.0, 8.0,
                      10.0, 11.0), ncol=2, byrow=TRUE)
-songlist2 <- matrix(c(0.5, 1.5,
-                      4.0, 5.0,
-                      6.5, 7.5,
-                     10.5, 12.0), ncol=2, byrow=TRUE)
-song.NumOverlap(songlist2, songlist1)
+target <- matrix(c(0.2, 1.5,
+                     4.0, 5.0,
+                     6.5, 7.5,
+                    10.5, 12.0), ncol=2, byrow=TRUE)
+song.NumOverlap(target, reference)
 }
 \seealso{
 \code{\link{song.DoSongsOverlap}} for comparing two songs,

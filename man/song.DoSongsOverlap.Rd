@@ -14,22 +14,32 @@ song.}
 }
 \value{
 \code{song.DoSongsOverlap} returns the duration of overlap in
-seconds.
+seconds. If \code{song2} begins during \code{song1} (i.e.\code{song1} is
+leading), the function returns a positive value. If \code{song1} begins
+during \code{song2} (i.e. \code{song2} is leading), the function returns a
+negative value. If the songs are non-overlapping, the function returns a
+value of 0.
 }
 \description{
 \code{song.DoSongsOverlap} determines whether two songs overlap and returns
-the duration of overlap in seconds.
+the duration of overlap in seconds. The sign of this value indicates the
+order of the overlapping songs.
 }
 \examples{
-## overlapping songs
+## songs overlap and song1 is leading
 song1 <- c(0.0, 1.0)
 song2 <- c(0.5, 2.0)
-song.DoSongsOverlap(song1, song2)
+song.DoSongsOverlap(song1,song2)
 
-## non-overlapping songs
+## songs overlap and song1 is lagging
+song1 <- c(1.0, 3.0)
+song2 <- c(0.0, 2.0)
+song.DoSongsOverlap(song1,song2)
+
+## songs do not overlap
 song1 <- c(0.0, 1.0)
-song2 <- c(1.0, 2.0)
-song.DoSongsOverlap(song1, song2)
+song2 <- c(2.0, 3.0)
+song.DoSongsOverlap(song1,song2)
 }
 \seealso{
 For two performances, use \code{\link{song.TimeOverlap}} to

@@ -20,9 +20,9 @@ the second column contains the end times of each song.}
 seconds.
 }
 \description{
-\code{song.OneSongWithSongList} calculates the total duration for which one
-song overlaps any song in a performance. This function is an extension of
-\code{\link{song.DoSongsOverlap}}.
+\code{song.OneSongWithSongList} calculates the duration for which one
+song overlaps and lags behind any song in a performance. This function is an
+extension of \code{\link{song.DoSongsOverlap}}.
 }
 \examples{
 ## overlapping song

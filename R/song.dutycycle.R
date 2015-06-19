@@ -40,7 +40,6 @@
 #' acoustic interference in singing birds. Science. 183:762-763.
 #' @export
 song.DutyCycleMethod <- function(indivs, dc.function = song.DutyCycleNum){
-  require(reshape2)
   num.indivs <- length(indivs)
   indiv.names <- rep("", num.indivs)
   observed <- matrix(0, num.indivs, num.indivs)

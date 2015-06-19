@@ -51,7 +51,6 @@ song.PlotSongs <- function(indivs, start.time = NA, end.time = NA){
     end.time <- max(my.df$End)
   }
   ## build ggplot object
-  require(ggplot2)
   songs.plot <- ggplot(data = my.df, aes(x = Individuals, ymin = Start,
                                          ymax = End, colour = Individuals)) +
     geom_linerange(size = I(2)) +
@@ -161,7 +160,6 @@ song.PlotResultsDensity <- function(results){
   }
 
   ## build ggplot object
-  require(ggplot2)
   overlap.density.plot <- ggplot(data = density.df,
                                  aes(x = Overlap, fill = Reference,
                                      colour = Target)) +

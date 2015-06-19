@@ -7,7 +7,7 @@ Install the library "devtools".
 Then open R and type
 
 > library(devtools)
-> install_github("https://github.com/ChristinaMasco/song")
+> install_github("ChristinaMasco/song")
 
 Then test that everything is running by typing
 

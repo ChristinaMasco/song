@@ -31,6 +31,7 @@
 #'
 #' ## Plot the songs occuring between 02m 30s and 02m 50s
 #' song.PlotSongs(c, 150, 170)
+#' @export
 
 song.PlotSongs <- function(indivs, start.time = NA, end.time = NA){
   all.songs <- matrix(0, 0, 2)
@@ -99,6 +100,7 @@ song.PlotSongs <- function(indivs, start.time = NA, end.time = NA){
 #' song.PlotResultsDensity(m.rand)
 #' @import ggplot2
 #' @import reshape2
+#' @export
 song.PlotResultsDensity <- function(results){
   ## create results data frame
   observed.df <- melt(results$observed)

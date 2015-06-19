@@ -130,6 +130,7 @@ song.DutyCycleMethod <- function(indivs, dc.function = song.DutyCycleNum){
 #' @seealso
 #' \code{\link{song.DutyCycleTime}} for calculating the \emph{duration} of
 #' overlap rather than the number of overlapping songs.
+#' @export
 
 song.DutyCycleNum <- function(target, reference){
   ## calculate proportion of time reference is singing
@@ -220,6 +221,7 @@ song.DutyCycleNum <- function(target, reference){
 #' @seealso
 #' \code{\link{song.DutyCycleNum}} for calculating the \emph{number} of
 #' overlapping songs rather than the duration of overlap.
+#' @export
 
 song.DutyCycleTime <- function(target, reference){
 

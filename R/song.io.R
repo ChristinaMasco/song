@@ -1,54 +1,55 @@
 #' @title Build a list of performance statistics for an individual.
-#' 
+#'
 #' @description
-#' \code{song.BuildIndiv} builds a list of performance statistics for an 
-#' individual based on the start and end times of the individual's songs.  
+#' \code{song.BuildIndiv} builds a list of performance statistics for an
+#' individual based on the start and end times of the individual's songs.
 #'
 #' @param ID A character string giving the name of the individual.
-#' @param songs An n x 2 matrix or data frame containing the start and end 
-#' times of n songs. The first column contains the start times of each song; 
+#' @param songs An n x 2 matrix or data frame containing the start and end
+#' times of n songs. The first column contains the start times of each song;
 #' the second column contains the end times of each song.
-#' @param start.record.time A numeric value indicating the start time of the 
+#' @param start.record.time A numeric value indicating the start time of the
 #' performance.
-#' @param end.record.time A numeric value indicating the end time of the 
+#' @param end.record.time A numeric value indicating the end time of the
 #' performance.
 #'
-#' @return 
+#' @return
 #' \code{song.BuildIndiv} returns a list containing the following components:
 #' \describe{
 #'   \item{\code{ID}}{A character string giving the name of the individual.}
 #'   \item{\code{start.record.time}}{A numeric value indicating the start time
 #'   of the performance.}
-#'   \item{\code{end.record.time}}{A numeric value indicating the end time of 
+#'   \item{\code{end.record.time}}{A numeric value indicating the end time of
 #'   the performance.}
-#'   \item{\code{songs}}{A matrix containing the start and end times of 
+#'   \item{\code{songs}}{A matrix containing the start and end times of
 #'   the songs.}
-#'   \item{\code{songs.num}}{An integer value indicating the number of songs 
+#'   \item{\code{songs.num}}{An integer value indicating the number of songs
 #'   in the performance.}
-#'   \item{\code{songs.length}}{A named numeric vector containing the durations 
+#'   \item{\code{songs.length}}{A named numeric vector containing the durations
 #'   of each song in the performance.}
-#'   \item{\code{songs.total.length}}{A numeric value indicating the total time 
+#'   \item{\code{songs.total.length}}{A numeric value indicating the total time
 #'   spent singing (i.e. \code{sum(songs.length)}).}
-#'   \item{\code{gaps.num}}{An integer value indicating the number of 
+#'   \item{\code{gaps.num}}{An integer value indicating the number of
 #'   inter-song intervals in the performance.}
-#'   \item{\code{gaps.length}}{A named numeric vector containing the durations 
+#'   \item{\code{gaps.length}}{A named numeric vector containing the durations
 #'   of each inter-song interval in the performance.}
-#'   \item{\code{gaps.total.length}}{A numeric value indicating the total time 
+#'   \item{\code{gaps.total.length}}{A numeric value indicating the total time
 #'   spent silent (i.e. \code{sum(gaps.length)}).}
-#' } 
-#' 
+#' }
+#'
 #' @examples
-#' songs <- matrix(c(0.0, 1.0, 
-#'                   3.0, 4.0, 
+#' songs <- matrix(c(0.0, 1.0,
+#'                   3.0, 4.0,
 #'                   7.0, 8.0,
 #'                  10.0, 11.0), ncol=2, byrow=TRUE)
-#' bird <- song.BuildIndiv(ID = "bird", songs, start.record.time = 0.0, 
+#' bird <- song.BuildIndiv(ID = "bird", songs, start.record.time = 0.0,
 #'                         end.record.time = 12.0)
 #'
-#' @seealso 
-#' To extract performance statistics from interactions involving multiple 
-#' individuals, use \code{\link{song.BuildAllIndivs}} (for matrices and data 
-#' frames) or \code{\link{song.ReadSongList}} (for tab-delimited text files).   
+#' @seealso
+#' To extract performance statistics from interactions involving multiple
+#' individuals, use \code{\link{song.BuildAllIndivs}} (for matrices and data
+#' frames) or \code{\link{song.ReadSongList}} (for tab-delimited text files).
+#' @export
 
 song.BuildIndiv <- function(ID, songs, start.record.time, end.record.time){
   indiv <- list()
@@ -83,26 +84,26 @@ song.BuildIndiv <- function(ID, songs, start.record.time, end.record.time){
     output <- data.frame(start,end,interval)
     print(output[which(output$interval<0),], row.names=TRUE)
     return(output)
-  }  
+  }
   return(indiv)
 }
 
 #' @title Extract performance statistics from a text file.
-#' 
+#'
 #' @description
-#' \code{song.ReadSongList} builds a list of performance statistics for each 
-#' individual from a tab-delimited text file containing the start time, end 
-#' time, and singer identity for each song in an interaction. This function is 
+#' \code{song.ReadSongList} builds a list of performance statistics for each
+#' individual from a tab-delimited text file containing the start time, end
+#' time, and singer identity for each song in an interaction. This function is
 #' an extension of \code{\link{song.BuildIndiv}}.
 #'
 #' @details
-#' The input for this function is a tab-delimited text file (*.txt) containing 
-#' the start time, end time, and singer identity for each song during an 
-#' interaction. These data can be acquired using sound annotation software 
-#' packages such as \href{http://www.syrinxpc.com/}{Syrinx-PC} (J. Burt, 
-#' Seattle, WA, USA) or 
-#' \href{http://www.birds.cornell.edu/brp/raven/RavenOverview.html}{Raven} 
-#' (Cornell Laboratory of Ornithology, Ithaca, NY USA).   
+#' The input for this function is a tab-delimited text file (*.txt) containing
+#' the start time, end time, and singer identity for each song during an
+#' interaction. These data can be acquired using sound annotation software
+#' packages such as \href{http://www.syrinxpc.com/}{Syrinx-PC} (J. Burt,
+#' Seattle, WA, USA) or
+#' \href{http://www.birds.cornell.edu/brp/raven/RavenOverview.html}{Raven}
+#' (Cornell Laboratory of Ornithology, Ithaca, NY USA).
 #' The following is an example to illustrate the necessary format of the input
 #' file:
 #' \tabular{lll}{
@@ -113,43 +114,44 @@ song.BuildIndiv <- function(ID, songs, start.record.time, end.record.time){
 #' 12 \tab 16 \tab bird2
 #' }
 #'
-#' @param file The name of the file from which the data are to be read. If it 
+#' @param file The name of the file from which the data are to be read. If it
 #' does not contain an absolute path, the file name is relative to the current
 #' working directory, \code{\link{getwd}()}.
-#' @param start.record.time A numeric value indicating the start time of the 
-#' interaction. An optional parameter - if not specified, the minimum start 
+#' @param start.record.time A numeric value indicating the start time of the
+#' interaction. An optional parameter - if not specified, the minimum start
 #' time is used (i.e. the start of the first song).
-#' @param end.record.time A numeric value indicating the end time of the 
+#' @param end.record.time A numeric value indicating the end time of the
 #' interaction. An optional parameter - if not specified, the maximum end time
 #' is used (i.e. the end of the last song).
 #'
-#' @return 
-#' \code{song.ReadSongList} returns a list containing the following components 
+#' @return
+#' \code{song.ReadSongList} returns a list containing the following components
 #' for each individual:
 #' \describe{
 #'   \item{\code{ID}}{A character string giving the name of the individual.}
 #'   \item{\code{start.record.time}}{A numeric value indicating the start time
 #'   of the interaction.}
-#'   \item{\code{end.record.time}}{A numeric value indicating the end time of 
+#'   \item{\code{end.record.time}}{A numeric value indicating the end time of
 #'   the interaction.}
-#'   \item{\code{songs}}{A matrix containing the start and end times of 
+#'   \item{\code{songs}}{A matrix containing the start and end times of
 #'   each of the individual's songs.}
-#'   \item{\code{songs.num}}{An integer value indicating the number of songs 
+#'   \item{\code{songs.num}}{An integer value indicating the number of songs
 #'   produced by the individual.}
-#'   \item{\code{songs.length}}{A named numeric vector containing the durations 
+#'   \item{\code{songs.length}}{A named numeric vector containing the durations
 #'   of each song produced by the individual.}
-#'   \item{\code{songs.total.length}}{A numeric value indicating the total time 
+#'   \item{\code{songs.total.length}}{A numeric value indicating the total time
 #'   the individual spent singing (i.e. \code{sum(songs.length)}).}
-#'   \item{\code{gaps.num}}{An integer value indicating the number of 
+#'   \item{\code{gaps.num}}{An integer value indicating the number of
 #'   inter-song intervals in the individual's performance.}
-#'   \item{\code{gaps.length}}{A named numeric vector containing the durations 
+#'   \item{\code{gaps.length}}{A named numeric vector containing the durations
 #'   of each inter-song interval in the individual's performance.}
-#'   \item{\code{gaps.total.length}}{A numeric value indicating the total time 
+#'   \item{\code{gaps.total.length}}{A numeric value indicating the total time
 #'   the individual was silent (i.e. \code{sum(gaps.length)}).}
-#' } 
-#' 
-#' @seealso \code{\link{song.BuildAllIndivs}} for data stored in a matrix or 
+#' }
+#'
+#' @seealso \code{\link{song.BuildAllIndivs}} for data stored in a matrix or
 #' data frame.
+#' @export
 
 song.ReadSongList <- function(file,
                               start.record.time = NA,
@@ -188,60 +190,61 @@ song.ReadSongList <- function(file,
 }
 
 #' @title Build a list of performance statistics for multiple individuals.
-#' 
+#'
 #' @description
-#' \code{song.BuildAllIndivs} builds a list of performance statistics from a 
-#' matrix or data frame containing the start time, end time, and singer 
-#' identity for each song in an interaction. This function is an extension of 
+#' \code{song.BuildAllIndivs} builds a list of performance statistics from a
+#' matrix or data frame containing the start time, end time, and singer
+#' identity for each song in an interaction. This function is an extension of
 #' \code{\link{song.BuildIndiv}}.
 #'
-#' @param songs An n x 3 matrix or data frame containing the start time, end 
+#' @param songs An n x 3 matrix or data frame containing the start time, end
 #' time, and singer identity for each of n songs. The first column contains the
-#' start times of each song; the second column contains the end times of each 
-#' song; the third column specifies the name of the individual that produced 
+#' start times of each song; the second column contains the end times of each
+#' song; the third column specifies the name of the individual that produced
 #' the song.
-#' @param start.record.time A numeric value indicating the start time of the 
-#' interaction. An optional parameter - if not specified, the minimum start 
+#' @param start.record.time A numeric value indicating the start time of the
+#' interaction. An optional parameter - if not specified, the minimum start
 #' time is used (i.e. the start of the first song).
-#' @param end.record.time A numeric value indicating the end time of the 
+#' @param end.record.time A numeric value indicating the end time of the
 #' interaction. An optional parameter - if not specified, the maximum end time
 #' is used (i.e. the end of the last song).
 #'
-#' @return 
+#' @return
 #' \code{song.BuildAllIndivs} returns a list containing the following components
 #' for each individual:
 #' \describe{
 #'   \item{\code{ID}}{A character string giving the name of the individual.}
 #'   \item{\code{start.record.time}}{A numeric value indicating the start time
 #'   of the interaction.}
-#'   \item{\code{end.record.time}}{A numeric value indicating the end time of 
+#'   \item{\code{end.record.time}}{A numeric value indicating the end time of
 #'   the interaction.}
-#'   \item{\code{songs}}{A matrix containing the start and end times of 
+#'   \item{\code{songs}}{A matrix containing the start and end times of
 #'   each of the individual's songs.}
-#'   \item{\code{songs.num}}{An integer value indicating the number of songs 
+#'   \item{\code{songs.num}}{An integer value indicating the number of songs
 #'   produced by the individual.}
-#'   \item{\code{songs.length}}{A named numeric vector containing the durations 
+#'   \item{\code{songs.length}}{A named numeric vector containing the durations
 #'   of each song produced by the individual.}
-#'   \item{\code{songs.total.length}}{A numeric value indicating the total time 
+#'   \item{\code{songs.total.length}}{A numeric value indicating the total time
 #'   the individual spent singing (i.e. \code{sum(songs.length)}).}
-#'   \item{\code{gaps.num}}{An integer value indicating the number of 
+#'   \item{\code{gaps.num}}{An integer value indicating the number of
 #'   inter-song intervals in the individual's performance.}
-#'   \item{\code{gaps.length}}{A named numeric vector containing the durations 
+#'   \item{\code{gaps.length}}{A named numeric vector containing the durations
 #'   of each inter-song interval in the individual's performance.}
-#'   \item{\code{gaps.total.length}}{A numeric value indicating the total time 
+#'   \item{\code{gaps.total.length}}{A numeric value indicating the total time
 #'   the individual was silent (i.e. \code{sum(gaps.length)}).}
-#' } 
-#' 
+#' }
+#'
 #' @examples
 #' c <- song.BuildAllIndivs(chickadees)
-#' 
+#'
 #' w <- song.BuildAllIndivs(wrens)
-#' 
+#'
 #' m <- song.BuildAllIndivs(manakins, 100, 250)
 #'
-#' @seealso 
-#' \code{\link{song.ReadSongList}} for data stored in a tab-delimited text 
-#' file.  
+#' @seealso
+#' \code{\link{song.ReadSongList}} for data stored in a tab-delimited text
+#' file.
+#' @export
 
 song.BuildAllIndivs <- function(songs,
                               start.record.time = NA,

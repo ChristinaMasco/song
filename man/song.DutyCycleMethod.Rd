@@ -44,8 +44,7 @@ song.DutyCycleMethod(w)
 song.DutyCycleMethod(w, song.DutyCycleTime)
 }
 \references{
-Ficken, R.W., Ficken, M.S. & Hailman, J.P. (1974). Temporal pattern shifts
-to avoid acoustic interference in singing birds. \emph{Science},
-\strong{183}, 762-763.
+Ficken RW, Ficken MS, Hailman JP. 1974. Temporal pattern shifts to avoid
+acoustic interference in singing birds. Science. 183:762-763.
 }
 

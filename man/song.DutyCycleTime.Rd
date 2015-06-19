@@ -53,9 +53,8 @@ c <- song.BuildAllIndivs(chickadees)
 song.DutyCycleTime(c$bird, c$playback)
 }
 \references{
-Ficken, R.W., Ficken, M.S. & Hailman, J.P. (1974). Temporal pattern shifts
-to avoid acoustic interference in singing birds. \emph{Science},
-\strong{183}, 762-763.
+Ficken RW, Ficken MS, Hailman JP. 1974. Temporal pattern shifts to avoid
+acoustic interference in singing birds. Science. 183:762-763.
 }
 \seealso{
 \code{\link{song.DutyCycleNum}} for calculating the \emph{number} of

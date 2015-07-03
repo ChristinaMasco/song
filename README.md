@@ -34,6 +34,14 @@ overlap in the interaction. To plot the results of the analysis, use the
 function <code>song.PlotResultsDensity</code>. To learn more about each of 
 these functions, type <code>"?"</code> followed by the name of the function.
 
+The following is an example using the built-in data set, <code>wrens</code>:
+
+> birds <- song.BuildAllIndivs(wrens)  # use song.ReadSongList() for text files
+
+> rndbirds <- song.Simulate(birds)
+
+> song.PlotResultsDensity(rndbirds)
+
 Additional features of the package include:
 <ul>
 <li> Two methods for calculating overlap:

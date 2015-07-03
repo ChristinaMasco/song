@@ -1,3 +1,15 @@
+#batch function for simulate (needed for song.AccuracyTest)
+
+song.BatchSimulate <- function(indivlist, num.rand = 100,
+                               overlap.function = "song.TimeOverlap",
+                               randomize.function = 
+                                 "song.RandomizeSampleGaps"){
+  output <- lapply(indivlist, song.Simulate, num.rand=num.rand, 
+                   overlap.function=overlap.function,
+                   randomize.function=randomize.function)
+  return(output)
+}
+
 #' @title Test the accuracy of a song overlap null model.
 #' 
 #' @description

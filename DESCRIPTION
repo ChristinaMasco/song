@@ -1,10 +1,11 @@
 Package: song
-Title: Song Overlap Null-model Generator for animal communication
+Title: The Song Overlap Null model Generator for animal communication
 Version: 0.9
 Author: Christina Masco <cmasco@uchicago.edu>, Stefano Allesina
     <sallesina@uchicago.edu>
 Maintainer: Christina Masco <cmasco@uchicago.edu>
-Description: What the package does (paragraph)
+Description: This package can be used to calculate the expected amount of 
+    chance overlap for a given interaction.
 Depends:
     R (>= 3.0.2),
 Imports:

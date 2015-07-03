@@ -1,4 +1,4 @@
-#' A sample interaction from black-capped chickadees.
+#' An interaction between a black-capped chickadee and a playback stimulus.
 #'
 #' A data set containing the start and end times of each song produced during
 #' an interaction between a black-capped chickadee and a fixed-interval
@@ -14,7 +14,7 @@
 #'
 "chickadees"
 
-#' A sample interaction from rufous-and-white wrens.
+#' An interaction between a female rufous-and-white wren and her mate.
 #'
 #' A data set containing the start and end times of each song produced during
 #' an interaction between a duetting pair of rufous-and-white wrens. These data
@@ -35,7 +35,7 @@
 #'
 "wrens"
 
-#' A sample interaction from long-tailed manakins.
+#' An interaction between neighboring pairs of long-tailed manakins.
 #'
 #' A data set containing the start and end times of each song produced during
 #' an interaction between neighboring male-male pairs of long-tailed manakins.

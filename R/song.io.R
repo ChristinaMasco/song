@@ -104,8 +104,7 @@ song.BuildIndiv <- function(ID, songs, start.record.time, end.record.time){
 #' Seattle, WA, USA) or
 #' \href{http://www.birds.cornell.edu/brp/raven/RavenOverview.html}{Raven}
 #' (Cornell Laboratory of Ornithology, Ithaca, NY USA).
-#' The following is an example to illustrate the necessary format of the input
-#' file:
+#' The following is an example input file:
 #' \tabular{lll}{
 #' start \tab end \tab ID \cr
 #' 0 \tab 5 \tab bird1 \cr
@@ -116,7 +115,7 @@ song.BuildIndiv <- function(ID, songs, start.record.time, end.record.time){
 #'
 #' @param file The name of the file from which the data are to be read. If it
 #' does not contain an absolute path, the file name is relative to the current
-#' working directory, \code{\link{getwd}()}.
+#' working directory.
 #' @param start.record.time A numeric value indicating the start time of the
 #' interaction. An optional parameter - if not specified, the minimum start
 #' time is used (i.e. the start of the first song).
@@ -140,13 +139,13 @@ song.BuildIndiv <- function(ID, songs, start.record.time, end.record.time){
 #'   \item{\code{songs.length}}{A named numeric vector containing the durations
 #'   of each song produced by the individual.}
 #'   \item{\code{songs.total.length}}{A numeric value indicating the total time
-#'   the individual spent singing (i.e. \code{sum(songs.length)}).}
+#'   for which the individual was singing (i.e. \code{sum(songs.length)}).}
 #'   \item{\code{gaps.num}}{An integer value indicating the number of
 #'   inter-song intervals in the individual's performance.}
 #'   \item{\code{gaps.length}}{A named numeric vector containing the durations
 #'   of each inter-song interval in the individual's performance.}
 #'   \item{\code{gaps.total.length}}{A numeric value indicating the total time
-#'   the individual was silent (i.e. \code{sum(gaps.length)}).}
+#'   for which the individual was silent (i.e. \code{sum(gaps.length)}).}
 #' }
 #'
 #' @seealso \code{\link{song.BuildAllIndivs}} for data stored in a matrix or
@@ -225,13 +224,13 @@ song.ReadSongList <- function(file,
 #'   \item{\code{songs.length}}{A named numeric vector containing the durations
 #'   of each song produced by the individual.}
 #'   \item{\code{songs.total.length}}{A numeric value indicating the total time
-#'   the individual spent singing (i.e. \code{sum(songs.length)}).}
+#'   for which the individual was singing (i.e. \code{sum(songs.length)}).}
 #'   \item{\code{gaps.num}}{An integer value indicating the number of
 #'   inter-song intervals in the individual's performance.}
 #'   \item{\code{gaps.length}}{A named numeric vector containing the durations
 #'   of each inter-song interval in the individual's performance.}
 #'   \item{\code{gaps.total.length}}{A numeric value indicating the total time
-#'   the individual was silent (i.e. \code{sum(gaps.length)}).}
+#'   for which the individual was silent (i.e. \code{sum(gaps.length)}).}
 #' }
 #'
 #' @examples

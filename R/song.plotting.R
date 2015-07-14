@@ -33,7 +33,8 @@
 #' song.PlotSongs(c, 150, 170)
 #' @export
 
-song.PlotSongs <- function(indivs, start.time = NA, end.time = NA){
+song.PlotSongs <- function(indivs, start.time = NA, end.time = NA,
+                           breakpt = NA, line.width = 2){
   all.songs <- matrix(0, 0, 2)
   all.names <- character(0)
   ## extract start and end times from individual performance stats
@@ -50,12 +51,62 @@ song.PlotSongs <- function(indivs, start.time = NA, end.time = NA){
   if (is.na(end.time)){
     end.time <- max(my.df$End)
   }
+  ## remove data outside of desired time range
+  my.df <- my.df[which(my.df$Start >= start.time & my.df$End <= end.time),]
+  ## check if user specified a breakpoint
+  if (is.na(breakpt)){
+    breakpt <- ceiling(end.time)
+  }
+  ## add bins for faceting
+  num.bins <- ceiling(end.time/breakpt)
+  bins <- c(0:num.bins)
+  ## find the breaks and adjust for start.time
+  tmp.breaks <- bins*breakpt
+  breaks <- tmp.breaks + start.time
+  ## put songs into bins
+  group <- numeric()
+  for(i in 1:length(my.df$Start)){
+    for (j in 1:(length(breaks)-1)){
+      if(my.df$Start[i] >= breaks[j] && my.df$Start[i] < breaks[j+1]){
+        group[i] <- j
+      }
+    }
+  }
+  my.df <- data.frame(my.df, group)
+  ## make dummy data to set x-axis limits
+  if (breakpt == ceiling(end.time)){
+    ## if no breakpoint specified, use start and end times
+    dummy.start <- start.time
+    dummy.end <- end.time
+    dummy.df <- data.frame(Individuals=all.names[1], Start=dummy.start,
+                           End=dummy.end, group=1)
+    x.lab <- "Time (in seconds)"
+    ## do not modify axis text
+    x.line <- element_text(colour="black")
+
+    ## if specified, use breaks
+  } else{
+    dummy.start <- breaks[1:(length(breaks)-1)]
+    dummy.end <- dummy.start + breakpt
+    dummy.group <- bins[2:length(bins)]
+    dummy.df <- data.frame(Individuals=all.names[1], Start=dummy.start,
+                           End=dummy.end, group=dummy.group)
+    ## create x axis label
+    x.lab <- paste("Time (panels represent ", breakpt, "second intervals)")
+    ## remove axis text
+    x.line <- element_blank()
+  }
+  ## remove dummy data outside of desired time range
+  dummy.df <- dummy.df[which(dummy.end >= start.time &
+                               dummy.start <= end.time),]
   ## build ggplot object
   songs.plot <- ggplot(data = my.df, aes(x = Individuals, ymin = Start,
                                          ymax = End, colour = Individuals)) +
-    geom_linerange(size = I(2)) +
-    scale_y_continuous("Time", limits=c(start.time, end.time)) +
-    coord_flip() + theme_bw() + theme(legend.position = "none")
+    geom_linerange(size = I(line.width)) +  geom_blank(data=dummy.df) +
+    facet_grid(group ~ ., scales="free", space="free") +
+    scale_y_continuous(name=x.lab) + coord_flip() + theme_bw() +
+    theme(axis.text.x=x.line, legend.position = "none",
+          strip.text.y = element_blank())
   return(songs.plot)
 }
 

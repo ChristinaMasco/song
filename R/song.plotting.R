@@ -229,7 +229,7 @@ song.PlotResultsDensity <- function(results){
     geom_vline(data = all.df,
                aes(xintercept = Observed),
                colour = I("black"), linetype = 2, alpha = 0.5, size = 0.75) +                                                    geom_text(data = p.df, aes(x = xpos, y = ypos, label = mylabel), hjust = 1, vjust = 1, size = 4, col = "black") +
-    facet_grid(Reference ~ Target, scales = "free_y") +
+    facet_grid(Reference ~ Target, scales = "free_y", labeller = label_both) +
     theme(legend.position = "none")
   return(overlap.density.plot)
 }

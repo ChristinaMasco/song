@@ -3,15 +3,15 @@
 #' @description
 #' \code{song.PlotSongs} creates a \code{\link{ggplot}} object depicting the
 #' relative timing of songs during an interaction. Each song is represented by
-#' a line segment plotted along a time axis. Songs are color-coded and
+#' a line segment plotted on a time axis. Songs are color-coded and
 #' plotted by individual.
 #'
 #' @details
 #' The optional parameters \code{start.time} and \code{end.time} set the limits
 #' of the x-axis of the plot. If specified, these parameters can be used to
-#' view select portions of an interaction. This practice often results in
-#' the following warning message: "Removed ## rows containing missing values
-#' (geom_segment)." This warning can be safely ignored.
+#' view a select portion of the interaction. \code{breakpt} wraps the x-axis,
+#' displaying the interaction over a series of panels arranged vertically. This
+#' feature can be especially useful for viewing short songs over long durations.
 #'
 #' @param indivs A list created by \code{\link{song.BuildAllIndivs}} or
 #' \code{\link{song.ReadSongList}} that contains the performance statistics of
@@ -22,6 +22,10 @@
 #' @param end.time A numeric value indicating the end time of the
 #' interaction in seconds. An optional parameter - if not specified, the
 #' maximum end time is used (i.e. the end of the last song).
+#' @param breakpt An optional parameter for wrapping the time axis using the
+#' function \code{\link{facet_grid}}. \code{breakpt} is a numeric value
+#' indicating the duration of each plot panel.
+#' @param line.wt A numeric value indicating the line thickness.
 #'
 #' @examples
 #' c <- song.BuildAllIndivs(chickadees)
@@ -29,12 +33,19 @@
 #' ## Plot the entire interaction
 #' song.PlotSongs(c)
 #'
-#' ## Plot the songs occuring between 02m 30s and 02m 50s
-#' song.PlotSongs(c, 150, 170)
+#' ## Change the line weight
+#' song.PlotSongs(c, line.wt=10)
+#'
+#' ## Plot the songs occuring between 02m 30s and 03m 00s
+#' song.PlotSongs(c, start.time=150, end.time=180, line.wt=10)
+#'
+#' ## Plot the entire interaction in 30 second panels
+#' song.PlotSongs(c, breakpt=30)
+#'
 #' @export
 
 song.PlotSongs <- function(indivs, start.time = NA, end.time = NA,
-                           breakpt = NA, line.width = 2){
+                           breakpt = NA, line.wt = 5){
   all.songs <- matrix(0, 0, 2)
   all.names <- character(0)
   ## extract start and end times from individual performance stats
@@ -102,7 +113,7 @@ song.PlotSongs <- function(indivs, start.time = NA, end.time = NA,
   ## build ggplot object
   songs.plot <- ggplot(data = my.df, aes(x = Individuals, ymin = Start,
                                          ymax = End, colour = Individuals)) +
-    geom_linerange(size = I(line.width)) +  geom_blank(data=dummy.df) +
+    geom_linerange(size = I(line.wt)) +  geom_blank(data=dummy.df) +
     facet_grid(group ~ ., scales="free", space="free") +
     scale_y_continuous(name=x.lab) + coord_flip() + theme_bw() +
     theme(axis.text.x=x.line, legend.position = "none",

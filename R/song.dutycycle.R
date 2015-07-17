@@ -75,7 +75,7 @@ song.DutyCycleMethod <- function(indivs, dc.function = song.DutyCycleNum){
   all.df <- cbind(obs.df, "Expected" = exp.df[,3],"X.squared" = stat.df[,3],
                   "P.value" = p.df[,3])
   output <- all.df[which(all.df$Target != all.df$Reference),]
-  return(print(output, row.names=FALSE))
+  return(output)
 }
 
 #' @title Predict the number of overlapping songs using the duty cycle method.

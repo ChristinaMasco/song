@@ -42,6 +42,7 @@
 #' ## Plot the entire interaction in 30 second panels
 #' song.PlotSongs(c, breakpt=30)
 #'
+#' @import ggplot2
 #' @export
 
 song.PlotSongs <- function(indivs, start.time = NA, end.time = NA,
@@ -159,9 +160,11 @@ song.PlotSongs <- function(indivs, start.time = NA, end.time = NA,
 #' m.rand <- song.Simulate(m, 100, song.TimeOverlap,
 #'                         song.RandomizeSampleGaps)
 #' song.PlotResultsDensity(m.rand)
+#'
 #' @import ggplot2
 #' @import reshape2
 #' @export
+
 song.PlotResultsDensity <- function(results){
   ## create results data frame
   observed.df <- melt(results$observed)

@@ -70,7 +70,9 @@
 #' @seealso
 #' \code{\link{song.PlotResultsDensity}} to visualize the output of
 #' \code{song.Simulate}.
+#'
 #' @export
+
 song.Simulate <- function(indivs,
                           num.rand = 100,
                           overlap.function = "song.TimeOverlap",

@@ -19,7 +19,8 @@ overlap.
 }
 \description{
 \code{song.NumOverlap} counts the total number of songs in one performance
-that overlap and lag behind the songs in another. This function is an extension of
+that overlap the songs in another. A song is considered overlapping if it
+begins while another song is in progress. This function is an extension of
 \code{\link{song.OneSongWithSongList}}.
 }
 \examples{

@@ -38,7 +38,10 @@
 #' @references
 #' Ficken RW, Ficken MS, Hailman JP. 1974. Temporal pattern shifts to avoid
 #' acoustic interference in singing birds. Science. 183:762-763.
+#'
+#' @import reshape2
 #' @export
+
 song.DutyCycleMethod <- function(indivs, dc.function = song.DutyCycleNum){
   num.indivs <- length(indivs)
   indiv.names <- rep("", num.indivs)
@@ -129,6 +132,7 @@ song.DutyCycleMethod <- function(indivs, dc.function = song.DutyCycleNum){
 #' @seealso
 #' \code{\link{song.DutyCycleTime}} for calculating the \emph{duration} of
 #' overlap rather than the number of overlapping songs.
+#'
 #' @export
 
 song.DutyCycleNum <- function(target, reference){
@@ -220,6 +224,7 @@ song.DutyCycleNum <- function(target, reference){
 #' @seealso
 #' \code{\link{song.DutyCycleNum}} for calculating the \emph{number} of
 #' overlapping songs rather than the duration of overlap.
+#'
 #' @export
 
 song.DutyCycleTime <- function(target, reference){

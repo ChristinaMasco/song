@@ -19,7 +19,8 @@ seconds.
 }
 \description{
 \code{song.TimeOverlap} calculates the total duration for which the songs in
-one performance overlap and lag behind the songs in another. This function
+one performance overlap the songs in another. A song is considered
+overlapping if it begins while another song is in progress. This function
 is an extension of \code{\link{song.OneSongWithSongList}}.
 }
 \examples{

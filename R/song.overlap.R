@@ -62,8 +62,9 @@ song.DoSongsOverlap <- function(song1, song2){
 #'
 #' @description
 #' \code{song.OneSongWithSongList} calculates the duration for which one
-#' song overlaps and lags behind any song in a performance. This function is an
-#' extension of \code{\link{song.DoSongsOverlap}}.
+#' song overlaps the songs in a given performance. A song is considered 
+#' overlapping if it begins while another song is in progress. This function
+#' is an extension of \code{\link{song.DoSongsOverlap}}.
 #'
 #' @param song A numeric vector containing the start and end times of a song.
 #' The first value of the vector represents the start time of the song; the
@@ -104,7 +105,8 @@ song.OneSongWithSongList <- function(song, songlist){
 #'
 #' @description
 #' \code{song.TimeOverlap} calculates the total duration for which the songs in
-#' one performance overlap and lag behind the songs in another. This function
+#' one performance overlap the songs in another. A song is considered 
+#' overlapping if it begins while another song is in progress. This function
 #' is an extension of \code{\link{song.OneSongWithSongList}}.
 #'
 #' @param target,reference n x 2 matrices or data frames containing the start
@@ -143,7 +145,8 @@ song.TimeOverlap <- function(target, reference){
 #'
 #' @description
 #' \code{song.NumOverlap} counts the total number of songs in one performance
-#' that overlap and lag behind the songs in another. This function is an extension of
+#' that overlap the songs in another. A song is considered overlapping if it 
+#' begins while another song is in progress. This function is an extension of
 #' \code{\link{song.OneSongWithSongList}}.
 #'
 #' @param target,reference n x 2 matrices or data frames containing the start

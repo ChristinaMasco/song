@@ -7,8 +7,8 @@
 song.DutyCycleMethod(indivs, dc.function = song.DutyCycleNum)
 }
 \arguments{
-\item{indivs}{A list created by \code{\link{song.BuildAllIndivs}} or
-\code{\link{song.ReadSongList}} that contains the performance statistics of
+\item{indivs}{A list created by \code{\link{song.FromDataObj}} or
+\code{\link{song.FromTextFile}} that contains the performance statistics of
 each individual.}
 
 \item{dc.function}{The function to be used to calculate the expected amount
@@ -37,7 +37,7 @@ total duration of overlap by specifying \code{\link{song.DutyCycleTime}} as
 the \code{dc.function}.
 }
 \examples{
-w <- song.BuildAllIndivs(wrens)
+w <- song.FromDataObj(wrens)
 ## Traditional method: number of overlapping songs
 song.DutyCycleMethod(w)
 ## Modified method: duration of overlap

@@ -14,8 +14,8 @@
 #' total duration of overlap by specifying \code{\link{song.DutyCycleTime}} as
 #' the \code{dc.function}.
 #'
-#' @param indivs A list created by \code{\link{song.BuildAllIndivs}} or
-#' \code{\link{song.ReadSongList}} that contains the performance statistics of
+#' @param indivs A list created by \code{\link{song.FromDataObj}} or
+#' \code{\link{song.FromTextFile}} that contains the performance statistics of
 #' each individual.
 #'
 #' @param dc.function The function to be used to calculate the expected amount
@@ -29,7 +29,7 @@
 #' of individuals.
 #'
 #' @examples
-#' w <- song.BuildAllIndivs(wrens)
+#' w <- song.FromDataObj(wrens)
 #' ## Traditional method: number of overlapping songs
 #' song.DutyCycleMethod(w)
 #' ## Modified method: duration of overlap
@@ -97,8 +97,8 @@ song.DutyCycleMethod <- function(indivs, dc.function = song.DutyCycleNum){
 #' total number of flycatcher songs multiplied by the probability that the
 #' vireo is singing.
 #'
-#' @param reference,target Lists created using \code{\link{song.BuildAllIndivs}}
-#' or \code{\link{song.ReadSongList}} that contain the performance statistics
+#' @param reference,target Lists created using \code{\link{song.FromDataObj}}
+#' or \code{\link{song.FromTextFile}} that contain the performance statistics
 #' of two individuals. The amount of overlap is calculated for the target
 #' individual with respect to the reference individual.
 #'
@@ -122,7 +122,7 @@ song.DutyCycleMethod <- function(indivs, dc.function = song.DutyCycleNum){
 #' }
 #'
 #' @examples
-#' c <- song.BuildAllIndivs(chickadees)
+#' c <- song.FromDataObj(chickadees)
 #' song.DutyCycleNum(c$bird, c$playback)
 #'
 #' @references
@@ -189,8 +189,8 @@ song.DutyCycleNum <- function(target, reference){
 #' flycatcher is singing multiplied by the probability that the vireo is
 #' singing.
 #'
-#' @param reference,target Lists created using \code{\link{song.BuildAllIndivs}}
-#' or \code{\link{song.ReadSongList}} that contain the performance statistics
+#' @param reference,target Lists created using \code{\link{song.FromDataObj}}
+#' or \code{\link{song.FromTextFile}} that contain the performance statistics
 #' of two individuals. The amount of overlap is calculated for the target
 #' individual with respect to the reference individual.
 #'
@@ -214,7 +214,7 @@ song.DutyCycleNum <- function(target, reference){
 #' }
 #'
 #' @examples
-#' c <- song.BuildAllIndivs(chickadees)
+#' c <- song.FromDataObj(chickadees)
 #' song.DutyCycleTime(c$bird, c$playback)
 #'
 #' @references

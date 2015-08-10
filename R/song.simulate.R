@@ -18,8 +18,8 @@
 #' amount of overlap in the observed interaction. This process is repeated for
 #' each possible combination of reference and target individuals.
 #'
-#' @param indivs A list created by \code{\link{song.BuildAllIndivs}} or
-#' \code{\link{song.ReadSongList}} that contains the performance statistics of
+#' @param indivs A list created by \code{\link{song.FromDataObj}} or
+#' \code{\link{song.FromTextFile}} that contains the performance statistics of
 #' each individual.
 #' @param num.rand A numeric value indicating the desired number of
 #' randomizations.
@@ -57,7 +57,7 @@
 #' }
 #'
 #' @examples
-#' c <- song.BuildAllIndivs(chickadees)
+#' c <- song.FromDataObj(chickadees)
 #' c.sim <- song.Simulate(c, num.rand = 100, song.TimeOverlap,
 #'                         song.RandomizeSampleGaps)
 #' ## Duration of overlap in the observed interaction

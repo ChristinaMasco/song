@@ -8,8 +8,8 @@
 #' used with \code{\link{song.Simulate}} to calculate the expected amount of
 #' chance overlap in an interaction.
 #'
-#' @param indiv A list created using \code{\link{song.BuildAllIndivs}} or
-#' \code{\link{song.ReadSongList}} that contains the performance statistics of
+#' @param indiv A list created using \code{\link{song.FromDataObj}} or
+#' \code{\link{song.FromTextFile}} that contains the performance statistics of
 #' the individual.
 #'
 #' @return
@@ -17,7 +17,7 @@
 #' and end times of the songs in the new randomized performance.
 #'
 #' @examples
-#' c <- song.BuildAllIndivs(chickadees)
+#' c <- song.FromDataObj(chickadees)
 #' song.RandomizeSampleGaps(c$bird)
 #'
 #' @family randomization functions
@@ -54,8 +54,8 @@ song.RandomizeSampleGaps <- function(indiv){
 #' with \code{\link{song.Simulate}} to calculate the expected amount of chance
 #' overlap in an interaction.
 #'
-#' @param indiv A list created using \code{\link{song.BuildAllIndivs}} or
-#' \code{\link{song.ReadSongList}} that contains the performance statistics of
+#' @param indiv A list created using \code{\link{song.FromDataObj}} or
+#' \code{\link{song.FromTextFile}} that contains the performance statistics of
 #' the individual.
 #'
 #' @return
@@ -63,7 +63,7 @@ song.RandomizeSampleGaps <- function(indiv){
 #' and end times of the songs in the new randomized performance.
 #'
 #' @examples
-#' m <- song.BuildAllIndivs(manakins)
+#' m <- song.FromDataObj(manakins)
 #' song.RandomizeKeepGaps(m$pairA)
 #'
 #' @family randomization functions
@@ -95,8 +95,8 @@ song.RandomizeKeepGaps <- function(indiv){
 #' This function can be used with \code{\link{song.Simulate}} to calculate the
 #' expected amount of chance overlap in an interaction.
 #'
-#' @param indiv A list created using \code{\link{song.BuildAllIndivs}} or
-#' \code{\link{song.ReadSongList}} that contains the performance statistics of
+#' @param indiv A list created using \code{\link{song.FromDataObj}} or
+#' \code{\link{song.FromTextFile}} that contains the performance statistics of
 #' the individual.
 #'
 #' @return
@@ -104,7 +104,7 @@ song.RandomizeKeepGaps <- function(indiv){
 #' start and end times of the songs in the new randomized performance.
 #'
 #' @examples
-#' w <- song.BuildAllIndivs(wrens)
+#' w <- song.FromDataObj(wrens)
 #' song.RandomizeKeepSongOrder(w$female)
 #'
 #' @family randomization functions

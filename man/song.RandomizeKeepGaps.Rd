@@ -7,8 +7,8 @@
 song.RandomizeKeepGaps(indiv)
 }
 \arguments{
-\item{indiv}{A list created using \code{\link{song.BuildAllIndivs}} or
-\code{\link{song.ReadSongList}} that contains the performance statistics of
+\item{indiv}{A list created using \code{\link{song.FromDataObj}} or
+\code{\link{song.FromTextFile}} that contains the performance statistics of
 the individual.}
 }
 \value{
@@ -24,7 +24,7 @@ with \code{\link{song.Simulate}} to calculate the expected amount of chance
 overlap in an interaction.
 }
 \examples{
-m <- song.BuildAllIndivs(manakins)
+m <- song.FromDataObj(manakins)
 song.RandomizeKeepGaps(m$pairA)
 }
 \seealso{

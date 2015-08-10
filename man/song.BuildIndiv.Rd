@@ -57,7 +57,8 @@ bird <- song.BuildIndiv(ID = "bird", songs, start.record.time = 0.0,
 }
 \seealso{
 To extract performance statistics from interactions involving multiple
-individuals, use \code{\link{song.BuildAllIndivs}} (for matrices and data
-frames) or \code{\link{song.ReadSongList}} (for tab-delimited text files).
+individuals, use \code{\link{song.FromDataObj}} (for data stored in a matrix
+or data frame) or \code{\link{song.FromTextFile}} (for data stored in a
+tab-delimited text file.
 }
 

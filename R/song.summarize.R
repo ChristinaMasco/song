@@ -13,7 +13,7 @@
 #' individual with respect to the reference individual.
 #'
 #' @examples
-#' w <- song.BuildAllIndivs(wrens)
+#' w <- song.FromDataObj(wrens)
 #' w.rand <- song.Simulate(w, 100, song.TimeOverlap,
 #'                         song.RandomizeKeepSongOrder)
 #' song.Summarize(w.rand)

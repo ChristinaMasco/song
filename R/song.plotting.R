@@ -13,8 +13,8 @@
 #' displaying the interaction over a series of panels arranged vertically. This
 #' feature can be especially useful for viewing short songs over long durations.
 #'
-#' @param indivs A list created by \code{\link{song.BuildAllIndivs}} or
-#' \code{\link{song.ReadSongList}} that contains the performance statistics of
+#' @param indivs A list created by \code{\link{song.FromDataObj}} or
+#' \code{\link{song.FromTextFile}} that contains the performance statistics of
 #' each individual.
 #' @param start.time A numeric value indicating the start time of the
 #' interaction in seconds. An optional parameter - if not specified, the
@@ -28,7 +28,7 @@
 #' @param line.wt A numeric value indicating the line thickness.
 #'
 #' @examples
-#' c <- song.BuildAllIndivs(chickadees)
+#' c <- song.FromDataObj(chickadees)
 #'
 #' ## Plot the entire interaction
 #' song.PlotSongs(c)
@@ -144,19 +144,19 @@ song.PlotSongs <- function(indivs, start.time = NA, end.time = NA,
 #'
 #' @examples
 #' ## Black-capped chickadees
-#' c <- song.BuildAllIndivs(chickadees)
+#' c <- song.FromDataObj(chickadees)
 #' c.rand <- song.Simulate(c, 100, song.TimeOverlap,
 #'                         song.RandomizeSampleGaps)
 #' song.PlotResultsDensity(c.rand)
 #'
 #' ## Rufous-and-white wrens
-#' w <- song.BuildAllIndivs(wrens)
+#' w <- song.FromDataObj(wrens)
 #' w.rand <- song.Simulate(w, 100, song.TimeOverlap,
 #'                         song.RandomizeKeepSongOrder)
 #' song.PlotResultsDensity(w.rand)
 #'
 #' ## Long-tailed manakins
-#' m <- song.BuildAllIndivs(manakins)
+#' m <- song.FromDataObj(manakins)
 #' m.rand <- song.Simulate(m, 100, song.TimeOverlap,
 #'                         song.RandomizeSampleGaps)
 #' song.PlotResultsDensity(m.rand)

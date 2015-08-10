@@ -47,8 +47,9 @@
 #'
 #' @seealso
 #' To extract performance statistics from interactions involving multiple
-#' individuals, use \code{\link{song.BuildAllIndivs}} (for matrices and data
-#' frames) or \code{\link{song.ReadSongList}} (for tab-delimited text files).
+#' individuals, use \code{\link{song.FromDataObj}} (for data stored in a matrix
+#' or data frame) or \code{\link{song.FromTextFile}} (for data stored in a
+#' tab-delimited text file.
 #' @export
 
 song.BuildIndiv <- function(ID, songs, start.record.time, end.record.time){
@@ -91,7 +92,7 @@ song.BuildIndiv <- function(ID, songs, start.record.time, end.record.time){
 #' @title Extract performance statistics from a text file.
 #'
 #' @description
-#' \code{song.ReadSongList} builds a list of performance statistics for each
+#' \code{song.FromTextFile} builds a list of performance statistics for each
 #' individual from a tab-delimited text file containing the start time, end
 #' time, and singer identity for each song in an interaction. This function is
 #' an extension of \code{\link{song.BuildIndiv}}.
@@ -124,7 +125,7 @@ song.BuildIndiv <- function(ID, songs, start.record.time, end.record.time){
 #' is used (i.e. the end of the last song).
 #'
 #' @return
-#' \code{song.ReadSongList} returns a list containing the following components
+#' \code{song.FromTextFile} returns a list containing the following components
 #' for each individual:
 #' \describe{
 #'   \item{\code{ID}}{A character string giving the name of the individual.}
@@ -148,11 +149,11 @@ song.BuildIndiv <- function(ID, songs, start.record.time, end.record.time){
 #'   for which the individual was silent (i.e. \code{sum(gaps.length)}).}
 #' }
 #'
-#' @seealso \code{\link{song.BuildAllIndivs}} for data stored in a matrix or
+#' @seealso \code{\link{song.FromDataObj}} for data stored in a matrix or
 #' data frame.
 #' @export
 
-song.ReadSongList <- function(file,
+song.FromTextFile <- function(file,
                               start.record.time = NA,
                               end.record.time = NA){
   ## read data from file
@@ -188,10 +189,10 @@ song.ReadSongList <- function(file,
   return(indivs)
 }
 
-#' @title Build a list of performance statistics for multiple individuals.
+#' @title Extract performance statistics from a matrix or data frame.
 #'
 #' @description
-#' \code{song.BuildAllIndivs} builds a list of performance statistics from a
+#' \code{song.FromDataObj} builds a list of performance statistics from a
 #' matrix or data frame containing the start time, end time, and singer
 #' identity for each song in an interaction. This function is an extension of
 #' \code{\link{song.BuildIndiv}}.
@@ -209,7 +210,7 @@ song.ReadSongList <- function(file,
 #' is used (i.e. the end of the last song).
 #'
 #' @return
-#' \code{song.BuildAllIndivs} returns a list containing the following components
+#' \code{song.FromDataObj} returns a list containing the following components
 #' for each individual:
 #' \describe{
 #'   \item{\code{ID}}{A character string giving the name of the individual.}
@@ -234,18 +235,18 @@ song.ReadSongList <- function(file,
 #' }
 #'
 #' @examples
-#' c <- song.BuildAllIndivs(chickadees)
+#' c <- song.FromDataObj(chickadees)
 #'
-#' w <- song.BuildAllIndivs(wrens)
+#' w <- song.FromDataObj(wrens)
 #'
-#' m <- song.BuildAllIndivs(manakins, 100, 250)
+#' m <- song.FromDataObj(manakins, 100, 250)
 #'
 #' @seealso
-#' \code{\link{song.ReadSongList}} for data stored in a tab-delimited text
+#' \code{\link{song.FromTextFile}} for data stored in a tab-delimited text
 #' file.
 #' @export
 
-song.BuildAllIndivs <- function(songs,
+song.FromDataObj <- function(songs,
                               start.record.time = NA,
                               end.record.time = NA){
 

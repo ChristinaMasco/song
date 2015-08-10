@@ -8,8 +8,8 @@ song.PlotSongs(indivs, start.time = NA, end.time = NA, breakpt = NA,
   line.wt = 5)
 }
 \arguments{
-\item{indivs}{A list created by \code{\link{song.BuildAllIndivs}} or
-\code{\link{song.ReadSongList}} that contains the performance statistics of
+\item{indivs}{A list created by \code{\link{song.FromDataObj}} or
+\code{\link{song.FromTextFile}} that contains the performance statistics of
 each individual.}
 
 \item{start.time}{A numeric value indicating the start time of the
@@ -40,7 +40,7 @@ displaying the interaction over a series of panels arranged vertically. This
 feature can be especially useful for viewing short songs over long durations.
 }
 \examples{
-c <- song.BuildAllIndivs(chickadees)
+c <- song.FromDataObj(chickadees)
 
 ## Plot the entire interaction
 song.PlotSongs(c)

@@ -7,8 +7,8 @@
 song.DutyCycleNum(target, reference)
 }
 \arguments{
-\item{reference,target}{Lists created using \code{\link{song.BuildAllIndivs}}
-or \code{\link{song.ReadSongList}} that contain the performance statistics
+\item{reference,target}{Lists created using \code{\link{song.FromDataObj}}
+or \code{\link{song.FromTextFile}} that contain the performance statistics
 of two individuals. The amount of overlap is calculated for the target
 individual with respect to the reference individual.}
 }
@@ -47,7 +47,7 @@ total number of flycatcher songs multiplied by the probability that the
 vireo is singing.
 }
 \examples{
-c <- song.BuildAllIndivs(chickadees)
+c <- song.FromDataObj(chickadees)
 song.DutyCycleNum(c$bird, c$playback)
 }
 \references{

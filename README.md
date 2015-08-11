@@ -27,16 +27,20 @@ To load the package, type:
 The input for the SONG package is a tab-delimited text file that contains the 
 start time, end time, and singer identity for each song during an interaction.
 Once your data have been organized in this fashion, use the function 
-<code>song.ReadSongList</code> to build a list of performance statistics for
-each individual in your data set. Next, use the function 
-<code>song.Simulate</code> to calculate the observed and expected amounts of 
-overlap in the interaction. To plot the results of the analysis, use the 
-function <code>song.PlotResultsDensity</code>. To learn more about each of 
-these functions, type <code>"?"</code> followed by the name of the function.
+<code>song.FromTextFile</code> to build a list of performance statistics for
+each individual in your data set. If you have already imported these data into
+R, and they are stored in a matrix or data frame within the global environment,
+instead use the function <code>song.FromDataObj</code>. 
+
+Once this step is complete, use the function <code>song.Simulate</code> to 
+calculate the observed and expected amounts of overlap in the interaction. To 
+view the results of the analysis, use the function <code>song.Summarize</code>.
+To learn more about each of these functions, type <code>"?"</code> followed by 
+the name of the function.
 
 The following is an example using the built-in data set, <code>wrens</code>:
 
-> birds <- song.BuildAllIndivs(wrens)  # use song.ReadSongList() for text files
+> birds <- song.FromDataObj(wrens)  # use song.FromTextFile() for text files
 
 > rndbirds <- song.Simulate(birds)
 
@@ -55,13 +59,20 @@ Additional features of the package include:
   <li><code>song.RandomizeKeepGaps</code></li>
   <li><code>song.RandomizeKeepSongOrder</code></li>
   </ul>
-<li><code>song.DutyCycleMethod</code>: the duty cycle method for calculating 
-chance overlap (Ficken, Ficken, & Hailman 1974).</li>
+<li> The duty cycle method for calculating chance overlap (Ficken, Ficken, & 
+Hailman 1974): <code>song.DutyCycleMethod</code>.</li>
+<li> Functions for visualization:
+  <ul>
+  <li><code>song.PlotSongs</code> for viewing the relative timing of songs
+  during an interaction.</li>
+  <li><code>song.PlotResultsDensity</code> for plotting the observed and
+  expected amounts of overlap.
+  
 </ul>
 
 Please direct any questions to Christina Masco at cmasco@uchicago.edu.
 
 <h3>Reference information</h3>
-Masco C, Allesina S, Mennill DJ, Pruett-Jones, S. (in review).  The Song 
+Masco C, Allesina S, Mennill DJ, Pruett-Jones, S. 2015.  The Song 
 Overlap Null model Generator (SONG): a new tool for distinguishing between
-random and non-random song overlap.
+random and non-random song overlap. Bioacoustics. (in press)

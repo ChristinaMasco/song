@@ -44,7 +44,7 @@ The following is an example using the built-in data set, <code>wrens</code>:
 
 > rndbirds <- song.Simulate(birds)
 
-> song.PlotResultsDensity(rndbirds)
+> song.Summarize(rndbirds)
 
 Additional features of the package include:
 <ul>

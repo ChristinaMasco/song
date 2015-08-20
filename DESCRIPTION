@@ -4,7 +4,7 @@ Version: 0.9
 Author: Christina Masco <cmasco@uchicago.edu>, Stefano Allesina
     <sallesina@uchicago.edu>
 Maintainer: Christina Masco <cmasco@uchicago.edu>
-Description: This package can be used to calculate the expected amount of 
+Description: This package can be used to calculate the expected amount of
     chance overlap for a given interaction.
 Depends:
     R (>= 3.0.2),

@@ -112,6 +112,12 @@ song.PlotSongs <- function(indivs, start.time = NA, end.time = NA,
   dummy.df <- dummy.df[which(dummy.end >= start.time &
                                dummy.start <= end.time),]
   ## build ggplot object
+  ## ===================================
+  ## This is only to appease R CMD check
+  Individuals <- NULL
+  Start <- NULL
+  End <- NULL
+  ## ===================================
   songs.plot <- ggplot(data = my.df, aes(x = Individuals, ymin = Start,
                                          ymax = End, colour = Individuals)) +
     geom_linerange(size = I(line.wt)) +  geom_blank(data=dummy.df) +
@@ -225,13 +231,24 @@ song.PlotResultsDensity <- function(results){
   }
 
   ## build ggplot object
+  ## ===================================
+  ## This is only to appease R CMD check
+  Overlap <- NULL
+  Reference <- NULL
+  Target <- NULL
+  Observed <- NULL
+  xpos <- NULL
+  ypos <- NULL
+  mylabel <- NULL
+  ## ===================================
   overlap.density.plot <- ggplot(data = density.df,
                                  aes(x = Overlap, fill = Reference,
                                      colour = Target)) +
     geom_density(alpha = 0.2) +  theme_bw() + scale_y_continuous("Density") +
     geom_vline(data = all.df,
                aes(xintercept = Observed),
-               colour = I("black"), linetype = 2, alpha = 0.5, size = 0.75) +                                                    geom_text(data = p.df, aes(x = xpos, y = ypos, label = mylabel), hjust = 1, vjust = 1, size = 4, col = "black") +
+               colour = I("black"), linetype = 2, alpha = 0.5, size = 0.75) +
+    geom_text(data = p.df, aes(x = xpos, y = ypos, label = mylabel), hjust = 1, vjust = 1, size = 4, col = "black") +
     facet_grid(Reference ~ Target, scales = "free_y", labeller = label_both) +
     theme(legend.position = "none")
   return(overlap.density.plot)

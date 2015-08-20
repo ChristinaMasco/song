@@ -149,18 +149,6 @@ song.PlotSongs <- function(indivs, start.time = NA, end.time = NA,
 #' upper right corner of each panel.
 #'
 #' @examples
-#' ## Black-capped chickadees
-#' c <- song.FromDataObj(chickadees)
-#' c.rand <- song.Simulate(c, 100, song.TimeOverlap,
-#'                         song.RandomizeSampleGaps)
-#' song.PlotResultsDensity(c.rand)
-#'
-#' ## Rufous-and-white wrens
-#' w <- song.FromDataObj(wrens)
-#' w.rand <- song.Simulate(w, 100, song.TimeOverlap,
-#'                         song.RandomizeKeepSongOrder)
-#' song.PlotResultsDensity(w.rand)
-#'
 #' ## Long-tailed manakins
 #' m <- song.FromDataObj(manakins)
 #' m.rand <- song.Simulate(m, 100, song.TimeOverlap,

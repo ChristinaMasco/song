@@ -70,7 +70,7 @@ song.PlotSongs <- function(indivs, start.time = NA, end.time = NA,
     breakpt <- ceiling(end.time)
   }
   ## add bins for faceting
-  num.bins <- ceiling(end.time/breakpt)
+  num.bins <- ceiling((end.time-start.time)/breakpt)
   bins <- c(0:num.bins)
   ## find the breaks and adjust for start.time
   tmp.breaks <- bins*breakpt

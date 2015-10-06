@@ -9,9 +9,10 @@
 #' @details
 #' The optional parameters \code{start.time} and \code{end.time} set the limits
 #' of the x-axis of the plot. If specified, these parameters can be used to
-#' view a select portion of the interaction. \code{breakpt} wraps the x-axis,
-#' displaying the interaction over a series of panels arranged vertically. This
-#' feature can be especially useful for viewing short songs over long durations.
+#' view a select portion of the interaction. The optional parameter
+#' \code{breakpt} wraps the x-axis, displaying the interaction over a series of
+#' panels arranged vertically. This feature can be especially useful for
+#' viewing short songs over long durations.
 #'
 #' @param indivs A list created by \code{\link{song.FromDataObj}} or
 #' \code{\link{song.FromTextFile}} that contains the performance statistics of
@@ -140,7 +141,7 @@ song.PlotSongs <- function(indivs, start.time = NA, end.time = NA,
 #' the observed and expected amounts of overlap for an interaction.
 #'
 #' @return
-#' \code{song.PlotResultDensity} returns a \code{\link{ggplot}} object in which
+#' \code{song.PlotResultsDensity} returns a \code{\link{ggplot}} object in which
 #' each panel of the plot represents a pairwise interaction. Each row (and fill
 #' color) specifies the reference individual. Each column (and line color)
 #' specifies the target individual. Within each panel, the observed amount of
@@ -149,7 +150,6 @@ song.PlotSongs <- function(indivs, start.time = NA, end.time = NA,
 #' upper right corner of each panel.
 #'
 #' @examples
-#' ## Long-tailed manakins
 #' m <- song.FromDataObj(manakins)
 #' m.rand <- song.Simulate(m, 100, song.TimeOverlap,
 #'                         song.RandomizeSampleGaps)

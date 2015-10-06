@@ -1,9 +1,9 @@
 #' @title Compare observed overlap to chance expectations.
 #'
 #' @description
-#' \code{song.Simulate} calculates the expected amount of chance overlap for a
-#' given interaction, then compares the observed amount of overlap to
-#' this expectation to generate a p-value.
+#' \code{song.Simulate} uses resampling randomization to calculate the expected
+#' amount of chance overlap for a given interaction, then compares the observed
+#' amount of overlap to this expectation to generate a p-value.
 #'
 #' @details
 #' \code{song.Simulate} generates a user-defined number of randomized
@@ -68,8 +68,9 @@
 #' c.sim$p.values
 #'
 #' @seealso
-#' \code{\link{song.PlotResultsDensity}} to visualize the output of
-#' \code{song.Simulate}.
+#' \code{\link{song.PlotResultsDensity}} for visualizing the output of
+#' \code{song.Simulate}, and \code{\link{song.Summarize}} for displaying the
+#' output in a user-friendly table.
 #'
 #' @export
 

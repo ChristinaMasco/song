@@ -8,7 +8,7 @@
 #' used with \code{\link{song.Simulate}} to calculate the expected amount of
 #' chance overlap in an interaction.
 #'
-#' @param indiv A list created using \code{\link{song.FromDataObj}} or
+#' @param indiv A list created by \code{\link{song.FromDataObj}} or
 #' \code{\link{song.FromTextFile}} that contains the performance statistics of
 #' the individual.
 #'
@@ -18,6 +18,7 @@
 #'
 #' @examples
 #' c <- song.FromDataObj(chickadees)
+#' ## randomize bird's performance
 #' song.RandomizeSampleGaps(c$bird)
 #'
 #' @family randomization functions
@@ -54,7 +55,7 @@ song.RandomizeSampleGaps <- function(indiv){
 #' with \code{\link{song.Simulate}} to calculate the expected amount of chance
 #' overlap in an interaction.
 #'
-#' @param indiv A list created using \code{\link{song.FromDataObj}} or
+#' @param indiv A list created by \code{\link{song.FromDataObj}} or
 #' \code{\link{song.FromTextFile}} that contains the performance statistics of
 #' the individual.
 #'
@@ -64,6 +65,7 @@ song.RandomizeSampleGaps <- function(indiv){
 #'
 #' @examples
 #' m <- song.FromDataObj(manakins)
+#' ## randomize pairA's performance
 #' song.RandomizeKeepGaps(m$pairA)
 #'
 #' @family randomization functions
@@ -91,11 +93,11 @@ song.RandomizeKeepGaps <- function(indiv){
 #' \code{song.RandomizeKeepSongOrder} generates a randomized performance based
 #' on an individual's observed singing behavior. The KeepSongOrder method
 #' preserves the individual's natural song and inter-song interval durations as
-#' well as the natural song order, randomizing only the order of intervals.
+#' well as the natural song order, randomizing only the order of the intervals.
 #' This function can be used with \code{\link{song.Simulate}} to calculate the
 #' expected amount of chance overlap in an interaction.
 #'
-#' @param indiv A list created using \code{\link{song.FromDataObj}} or
+#' @param indiv A list created by \code{\link{song.FromDataObj}} or
 #' \code{\link{song.FromTextFile}} that contains the performance statistics of
 #' the individual.
 #'
@@ -105,6 +107,7 @@ song.RandomizeKeepGaps <- function(indiv){
 #'
 #' @examples
 #' w <- song.FromDataObj(wrens)
+#' ## randomize female's performance
 #' song.RandomizeKeepSongOrder(w$female)
 #'
 #' @family randomization functions

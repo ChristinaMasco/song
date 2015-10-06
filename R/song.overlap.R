@@ -11,7 +11,7 @@
 #' song.
 #'
 #' @return \code{song.DoSongsOverlap} returns the duration of overlap in
-#' seconds. If \code{song2} begins during \code{song1} (i.e.\code{song1} is
+#' seconds. If \code{song2} begins during \code{song1} (i.e. \code{song1} is
 #' leading), the function returns a positive value. If \code{song1} begins
 #' during \code{song2} (i.e. \code{song2} is leading), the function returns a
 #' negative value. If the songs are non-overlapping, the function returns a
@@ -33,9 +33,10 @@
 #' song2 <- c(2.0, 3.0)
 #' song.DoSongsOverlap(song1,song2)
 #'
-#' @seealso For two performances, use \code{\link{song.TimeOverlap}} to
-#' calculate the total duration of overlap and \code{\link{song.NumOverlap}} to
-#' calculate the total number of overlapping songs.
+#' @seealso For performances containing many songs, use
+#' \code{\link{song.TimeOverlap}} to calculate the total duration of overlap
+#' and \code{\link{song.NumOverlap}} to calculate the total number of
+#' overlapping songs.
 #'
 #' @export
 
@@ -61,8 +62,8 @@ song.DoSongsOverlap <- function(song1, song2){
 #' @title Calculate the overlap of one song and a performance.
 #'
 #' @description
-#' \code{song.OneSongWithSongList} calculates the duration for which one
-#' song overlaps the songs in a given performance. A song is considered 
+#' \code{song.OneSongWithSongList} calculates the total duration for which one
+#' song overlaps the songs in a given performance. A song is considered
 #' overlapping if it begins while another song is in progress. This function
 #' is an extension of \code{\link{song.DoSongsOverlap}}.
 #'
@@ -105,15 +106,16 @@ song.OneSongWithSongList <- function(song, songlist){
 #'
 #' @description
 #' \code{song.TimeOverlap} calculates the total duration for which the songs in
-#' one performance overlap the songs in another. A song is considered 
-#' overlapping if it begins while another song is in progress. This function
-#' is an extension of \code{\link{song.OneSongWithSongList}}.
+#' one performance overlap the songs in a second performance. A song is
+#' considered overlapping if it begins while another song is in progress. This
+#' function is an extension of \code{\link{song.OneSongWithSongList}}.
 #'
 #' @param target,reference n x 2 matrices or data frames containing the start
-#' and end times of n songs. The first columns contain the start times of each
-#' song; the second columns contain the end times of each song. The amount of
-#' overlap is calculated for the \code{target} with respect to the
-#' \code{reference}.
+#' and end times of n songs for the target and reference individuals,
+#' respectively. Within each matrix or data frame, the first column contains
+#' the start times of each song; the second column contains the end times of
+#' each song. The amount of overlap is calculated for the \code{target} with
+#' respect to the \code{reference}.
 #'
 #' @return \code{song.TimeOverlap} returns the total duration of overlap in
 #' seconds.
@@ -124,15 +126,13 @@ song.OneSongWithSongList <- function(song, songlist){
 #'                       7.0, 8.0,
 #'                      10.0, 11.0), ncol=2, byrow=TRUE)
 #' target <- matrix(c(0.5, 1.5,
-#'                      4.0, 5.0,
-#'                      6.5, 7.5,
-#'                     10.5, 12.0), ncol=2, byrow=TRUE)
+#'                    4.0, 5.0,
+#'                    6.5, 7.5,
+#'                   10.5, 12.0), ncol=2, byrow=TRUE)
 #' song.TimeOverlap(target, reference)
 #'
-#' @seealso \code{\link{song.DoSongsOverlap}} for comparing two songs,
-#' \code{\link{song.OneSongWithSongList}} for comparing one song to a
-#' performance, and \code{\link{song.NumOverlap}} for calculating the
-#' \emph{number} of overlapping songs rather than duration of overlap.
+#' @seealso \code{\link{song.NumOverlap}} for calculating the number of
+#' overlapping songs.
 #' @export
 
 song.TimeOverlap <- function(target, reference){
@@ -145,15 +145,16 @@ song.TimeOverlap <- function(target, reference){
 #'
 #' @description
 #' \code{song.NumOverlap} counts the total number of songs in one performance
-#' that overlap the songs in another. A song is considered overlapping if it 
-#' begins while another song is in progress. This function is an extension of
-#' \code{\link{song.OneSongWithSongList}}.
+#' that overlap the songs in a second performance. A song is considered
+#' overlapping if it begins while another song is in progress. This function is
+#' an extension of \code{\link{song.OneSongWithSongList}}.
 #'
 #' @param target,reference n x 2 matrices or data frames containing the start
-#' and end times of n songs. The first columns contain the start times of each
-#' song; the second columns contain the end times of each song. The amount of
-#' overlap is calculated for the \code{target} with respect to the
-#' \code{reference}.
+#' and end times of n songs for the target and reference individuals,
+#' respectively. Within each matrix or data frame, the first column contains
+#' the start times of each song; the second column contains the end times of
+#' each song. The amount of overlap is calculated for the \code{target} with
+#' respect to the \code{reference}.
 #'
 #' @return \code{song.NumOverlap} returns the total number of songs that
 #' overlap.
@@ -164,15 +165,13 @@ song.TimeOverlap <- function(target, reference){
 #'                       7.0, 8.0,
 #'                      10.0, 11.0), ncol=2, byrow=TRUE)
 #' target <- matrix(c(0.2, 1.5,
-#'                      4.0, 5.0,
-#'                      6.5, 7.5,
-#'                     10.5, 12.0), ncol=2, byrow=TRUE)
+#'                    4.0, 5.0,
+#'                    6.5, 7.5,
+#'                   10.5, 12.0), ncol=2, byrow=TRUE)
 #' song.NumOverlap(target, reference)
 #'
-#' @seealso \code{\link{song.DoSongsOverlap}} for comparing two songs,
-#' \code{\link{song.OneSongWithSongList}} for comparing one song to a
-#' performance, and \code{\link{song.TimeOverlap}} for calculating the
-#' \emph{duration} of overlap rather than the number of overlapping songs.
+#' @seealso \code{\link{song.TimeOverlap}} for calculating the duration of
+#' overlap.
 #' @export
 
 song.NumOverlap <- function(target, reference){

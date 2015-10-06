@@ -26,7 +26,8 @@
 #' @return \code{song.DutyCycleMethod} returns a data frame containing the
 #' observed amount of overlap, the expected amount of overlap, the value of the
 #' chi-squared test statistic, and the resulting p-value for each possible pair
-#' of individuals.
+#' of individuals. The amount of overlap is calculated for the target
+#' individual with respect to the reference individual.
 #'
 #' @examples
 #' w <- song.FromDataObj(wrens)
@@ -86,7 +87,7 @@ song.DutyCycleMethod <- function(indivs, dc.function = song.DutyCycleNum){
 #' @description
 #' \code{song.DutyCycleNum} calculates the expected number of overlapping and
 #' non-overlapping songs, then performs a chi-squared test to compare the
-#' observed and expected values. This function is to be used with
+#' observed and expected values. This function is called by
 #' \code{\link{song.DutyCycleMethod}}.
 #'
 #' @details
@@ -97,10 +98,10 @@ song.DutyCycleMethod <- function(indivs, dc.function = song.DutyCycleNum){
 #' total number of flycatcher songs multiplied by the probability that the
 #' vireo is singing.
 #'
-#' @param reference,target Lists created using \code{\link{song.FromDataObj}}
+#' @param target,reference Lists created by \code{\link{song.FromDataObj}}
 #' or \code{\link{song.FromTextFile}} that contain the performance statistics
-#' of two individuals. The amount of overlap is calculated for the target
-#' individual with respect to the reference individual.
+#' of the target and reference individuals, respectively. The amount of overlap
+#' is calculated for the \code{target} with respect to the \code{reference}.
 #'
 #' @return \code{song.DutyCycleNum} returns a list with class "\code{htest}"
 #' containing the following components:
@@ -117,8 +118,8 @@ song.DutyCycleMethod <- function(indivs, dc.function = song.DutyCycleNum){
 #'   overlapping and non-overlapping songs.}
 #'   \item{\code{expected}}{a numeric vector containing the expected number of
 #'   overlapping and non-overlapping songs.}
-#'   \item{\code{residuals}}{the Pearson residuals, (\code{observed} -
-#'   \code{expected}) / sqrt(\code{expected}).}
+#'   \item{\code{residuals}}{the Pearson residuals, \code{(observed - expected)
+#'   / sqrt(expected)}.}
 #' }
 #'
 #' @examples
@@ -130,7 +131,7 @@ song.DutyCycleMethod <- function(indivs, dc.function = song.DutyCycleNum){
 #' acoustic interference in singing birds. Science. 183:762-763.
 #'
 #' @seealso
-#' \code{\link{song.DutyCycleTime}} for calculating the \emph{duration} of
+#' \code{\link{song.DutyCycleTime}} for calculating the duration of
 #' overlap rather than the number of overlapping songs.
 #'
 #' @export
@@ -176,7 +177,7 @@ song.DutyCycleNum <- function(target, reference){
 #' @description
 #' \code{song.DutyCycleTime} calculates the expected durations of overlap and
 #' non-overlap, then performs a chi-squared test to compare the
-#' observed and expected values. This function is to be used with
+#' observed and expected values. This function is called by
 #' \code{\link{song.DutyCycleMethod}}.
 #'
 #' @details
@@ -189,10 +190,10 @@ song.DutyCycleNum <- function(target, reference){
 #' flycatcher is singing multiplied by the probability that the vireo is
 #' singing.
 #'
-#' @param reference,target Lists created using \code{\link{song.FromDataObj}}
+#' @param target,reference Lists created by \code{\link{song.FromDataObj}}
 #' or \code{\link{song.FromTextFile}} that contain the performance statistics
-#' of two individuals. The amount of overlap is calculated for the target
-#' individual with respect to the reference individual.
+#' of the target and reference individuals, respectively. The amount of overlap
+#' is calculated for the \code{target} with respect to the \code{reference}.
 #'
 #' @return \code{song.DutyCycleTime} returns a list with class "\code{htest}"
 #' containing the following components:
@@ -209,8 +210,8 @@ song.DutyCycleNum <- function(target, reference){
 #'   of overlap and non-overlap.}
 #'   \item{\code{expected}}{a numeric vector containing the expected duration
 #'   of overlap and non-overlap.}
-#'   \item{\code{residuals}}{the Pearson residuals, (\code{observed} -
-#'   \code{expected}) / sqrt(\code{expected}).}
+#'   \item{\code{residuals}}{the Pearson residuals, \code{(observed - expected)
+#'   / sqrt(expected)}.}
 #' }
 #'
 #' @examples
@@ -222,7 +223,7 @@ song.DutyCycleNum <- function(target, reference){
 #' acoustic interference in singing birds. Science. 183:762-763.
 #'
 #' @seealso
-#' \code{\link{song.DutyCycleNum}} for calculating the \emph{number} of
+#' \code{\link{song.DutyCycleNum}} for calculating the number of
 #' overlapping songs rather than the duration of overlap.
 #'
 #' @export

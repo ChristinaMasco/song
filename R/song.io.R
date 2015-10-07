@@ -173,6 +173,15 @@ song.FromTextFile <- function(file,
   if (is.na(end.record.time)){
     end.record.time <- max(songs[,1:2])
   }
+  ## check that start and end record.times include all songs
+  if(start.record.time > min(songs[,1:2])){
+    print("start.record.time must be < or = the start of the first song.")
+    return(-1)
+  }
+  if(end.record.time < max(songs[,1:2])){
+    print("end.record.time must be > or = the end of the last song.")
+    return(-1)
+  }
 
   ## build the individual lists
   indivs <- list()
@@ -262,6 +271,15 @@ song.FromDataObj <- function(songs,
   }
   if (is.na(end.record.time)){
     end.record.time <- max(songs[,1:2])
+  }
+  ## check that start and end record.times include all songs
+  if(start.record.time > min(songs[,1:2])){
+    print("start.record.time must be < or = the start of the first song.")
+    return(-1)
+  }
+  if(end.record.time < max(songs[,1:2])){
+    print("end.record.time must be > or = the end of the last song.")
+    return(-1)
   }
 
   ## build the individual lists

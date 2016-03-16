@@ -71,6 +71,6 @@ Hailman 1974): `song.DutyCycleMethod`.
 Please direct any questions to Christina Masco at cmasco@uchicago.edu.
 
 ## Reference information
-Masco C, Allesina S, Mennill DJ, Pruett-Jones, S. 2015.  The Song 
+Masco C, Allesina S, Mennill DJ, Pruett-Jones, S. 2016.  The Song 
 Overlap Null model Generator (SONG): a new tool for distinguishing between
-random and non-random song overlap. Bioacoustics. (in press)
+random and non-random song overlap. Bioacoustics 25, 29-40.

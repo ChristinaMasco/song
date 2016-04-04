@@ -25,8 +25,13 @@
 #' @export
 song.RandomizeSampleGaps <- function(indiv){
   rnd.songs <- indiv$songs
+  ## if the performance contains more than one song
   ## randomize song order
-  rnd.songs.length <- sample(indiv$songs.length)
+  if(length(rnd.songs[,1]) > 1){
+    rnd.songs.length <- sample(indiv$songs.length)
+  } else{
+    rnd.songs.length <- indiv$songs.length
+  }
   ## randomly select interval duration, keeping total duration constant
   break.points <- c(0,
                     sort(runif(indiv$songs.num)) * indiv$gaps.total.length,
@@ -72,8 +77,14 @@ song.RandomizeSampleGaps <- function(indiv){
 #' @export
 song.RandomizeKeepGaps <- function(indiv){
   rnd.songs <- indiv$songs
-  ## randomize song and interval order
-  rnd.songs.length <- sample(indiv$songs.length)
+  ## if the performance contains more than one song
+  ## randomize song order
+  if(length(rnd.songs[,1]) > 1){
+    rnd.songs.length <- sample(indiv$songs.length)
+  } else{
+    rnd.songs.length <- indiv$songs.length
+  }
+  ## randomize interval order
   rnd.gaps.length <- sample(indiv$gaps.length)
   ## calculate the total duration
   cumul.gaps <- cumsum(rnd.gaps.length[-length(rnd.gaps.length)])

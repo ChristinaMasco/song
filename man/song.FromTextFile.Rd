@@ -60,7 +60,6 @@ Seattle, WA, USA) or
 (Cornell Laboratory of Ornithology, Ithaca, NY USA).
 The following is an example input file:
 \tabular{lll}{
-start \tab end \tab ID \cr
 0 \tab 5 \tab bird1 \cr
 2 \tab 8 \tab bird2 \cr
 10 \tab 15 \tab bird1 \cr
